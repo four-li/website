@@ -1,0 +1,133 @@
+{extend name="common/base" /}
+
+{block name="main"}
+<div class="wrapper wrapper-content  animated fadeInRight blog">
+    <div class="row">
+        <!--<div class="col-lg-4">-->
+        <div class="col-sm-4">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="{:url('article_z1')}" class="btn-link">
+                        <h2>
+                            1 太在意别人对我的看法怎么办？
+                        </h2>
+                    </a>
+                    <div class="small m-b-xs">
+                        <strong>周碧云</strong> <span class="text-muted"><i class="fa fa-clock-o"></i>11-01 10:07</span>
+                    </div>
+                    <p>
+                        <ol>
+                            <li>对自己很多方面没有自信。但自尊心又很强，很争强好胜。</li>
+                            <li>你没有太多成功，被人认同的经历。</li>
+                            <li>你本身也很习惯性的在内心评价别人。</li>
+                        </ol>
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>标签：</h5>
+                            <button class="btn btn-primary btn-xs" type="button">女儿</button>
+                            <button class="btn btn-white btn-xs" type="button">态度</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>状态：</h5>
+                                <div> <i class="fa fa-comments-o"> </i> 0 评论 </div>
+                                <i class="fa fa-eye"> </i> 1 浏览
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-4">
+            <div class="ibox">
+                <div class="ibox-content">
+                    <a href="{:url('article_z2')}" class="btn-link">
+                        <h2>
+                            2 太在意别人对我的看法怎么办？
+                        </h2>
+                    </a>
+                    <div class="small m-b-xs">
+                        <strong>周碧云</strong> <span class="text-muted"><i class="fa fa-clock-o"></i>11-01 10:22</span>
+                    </div>
+                    <p>
+                        <ol>
+                            <li>对自己很多方面没有自信。但自尊心又很强，很争强好胜。</li>
+                            <li>你没有太多成功，被人认同的经历。</li>
+                            <li>你本身也很习惯性的在内心评价别人。</li>
+                        </ol>
+                    </p>
+                    <div class="row">
+                        <div class="col-md-6">
+                            <h5>标签：</h5>
+                            <button class="btn btn-primary btn-xs" type="button">女儿</button>
+                            <button class="btn btn-white btn-xs" type="button">态度</button>
+                        </div>
+                        <div class="col-md-6">
+                            <div class="small text-right">
+                                <h5>状态：</h5>
+                                <div> <i class="fa fa-comments-o"> </i> 0 评论 </div>
+                                <i class="fa fa-eye"> </i> 1 浏览
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+        </div>
+            {foreach name="list" item='v'}
+            <div class="col-sm-4">
+                <div class="ibox">
+                    <div class="ibox-content">
+                        <a href="article.html" class="btn-link">
+                            <h2>
+                                站长未开放阅读权限
+                            </h2>
+                        </a>
+                        <div class="small m-b-xs">
+                            <strong>烽 哥</strong> <span class="text-muted"><i class="fa fa-clock-o"></i> 未知 小时前</span>
+                        </div>
+                        <p>
+                            <ul>
+                        <li>暂不允许查看该文章内容</li>
+                        <li>暂不允许查看该文章内容</li>
+                        <li>暂不允许查看该文章内容</li>
+                            </ul>
+                        </p>
+                        <p>
+
+                        </p>
+                        <div class="row">
+                            <div class="col-md-6">
+                                <h5>标签：</h5>
+                                <button class="btn btn-primary btn-xs" type="button">未知</button>
+                                <button class="btn btn-white btn-xs" type="button">未知</button>
+                                <button class="btn btn-white btn-xs" type="button">未知</button>
+                            </div>
+                            <div class="col-md-6">
+                                <div class="small text-right">
+                                    <h5>状态：</h5>
+                                    <div> <i class="fa fa-comments-o"> </i> 未知 评论 </div>
+                                    <i class="fa fa-eye"> </i> 未知 浏览
+                                </div>
+                            </div>
+                        </div>
+                    </div>
+                </div>
+            </div>
+            {/foreach}
+
+            <div class="ibox">
+
+        <!--</div>-->
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+{/block}

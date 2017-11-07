@@ -1,0 +1,218 @@
+
+ThinkPHP遵循Apache2开源协议发布，并提供免费使用。
+版权所有Copyright © 2006-2016 by ThinkPHP (http://thinkphp.cn)
+All rights reserved。
+ThinkPHP® 商标和著作权所有者为上海顶想信息科技有限公司。
+
+Apache Licence是著名的非盈利开源组织Apache采用的协议。
+该协议和BSD类似，鼓励代码共享和尊重原作者的著作权，
+允许代码修改，再作为开源或商业软件发布。需要满足
+的条件： 
+1． 需要给代码的用户一份Apache Licence ；
+2． 如果你修改了代码，需要在被修改的文件中说明；
+3． 在延伸的代码中（修改和有源代码衍生的代码中）需要
+带有原来代码中的协议，商标，专利声明和其他原来作者规
+定需要包含的说明；
+4． 如果再发布的产品中包含一个Notice文件，则在Notice文
+件中需要带有本协议内容。你可以在Notice中增加自己的
+许可，但不可以表现为对Apache Licence构成更改。 
+具体的协议参考：http://www.apache.org/licenses/LICENSE-2.0
+
+THIS SOFTWARE IS PROVIDED BY THE COPYRIGHT HOLDERS AND CONTRIBUTORS
+"AS IS" AND ANY EXPRESS OR IMPLIED WARRANTIES, INCLUDING, BUT NOT
+LIMITED TO, THE IMPLIED WARRANTIES OF MERCHANTABILITY AND FITNESS
+FOR A PARTICULAR PURPOSE ARE DISCLAIMED. IN NO EVENT SHALL THE
+COPYRIGHT OWNER OR CONTRIBUTORS BE LIABLE FOR ANY DIRECT, INDIRECT,
+INCIDENTAL, SPECIAL, EXEMPLARY, OR CONSEQUENTIAL DAMAGES (INCLUDING,
+BUT NOT LIMITED TO, PROCUREMENT OF SUBSTITUTE GOODS OR SERVICES;
+LOSS OF USE, DATA, OR PROFITS; OR BUSINESS INTERRUPTION) HOWEVER
+CAUSED AND ON ANY THEORY OF LIABILITY, WHETHER IN CONTRACT, STRICT
+LIABILITY, OR TORT (INCLUDING NEGLIGENCE OR OTHERWISE) ARISING IN
+ANY WAY OUT OF THE USE OF THIS SOFTWARE, EVEN IF ADVISED OF THE
+POSSIBILITY OF SUCH DAMAGE.
+
+<?php
+namespace app\api\controller;
+
+use app\api\controller\Base as BaseController;
+use app\common\Model\User;
+use think\Request;
+use think\Db;
+
+class Main extends BaseController{
+
+    public $user_id;
+
+    public function _initialize(){
+        parent::_initialize();
+        # 调试时暂时关闭
+//        $this->check_token();
+        $this->user_id = Db::name('user')->where(['account'=>$this->request->param('account')])->find()['id'];
+    }
+
+    // 上传测试题答案
+    public function up_answer(Request $request){
+
+        $test_id = $request->param('test_id');
+        $bulk    = json_decode($request->param('bulk'),true);
+        if(!is_array($bulk)) return error('参数bulk错误');
+        if(!$test_id) return error('参数test_id缺失');
+
+        $insert['user_id'] = $this->user_id;
+        $insert['test_id'] = $test_id;
+        $insert['created'] = date('Y-m-d H:i:s', time());
+
+        // 删除旧数据
+        $del = [ 'user_id' => $this->user_id, 'test_id'=> $test_id ];
+        Db::name('answer_flow')->where($del)->delete();
+        switch($test_id){
+            case '1':
+                // 试卷一  [{“mark”:1,”answer”:0},{“mark”:2,”answer”:3}]
+                // 0 1 2 3 4  顺序对应5种答案
+                foreach($bulk as $v){
+                    $insert['mark_id'] = $v['mark'];
+                    $insert['answer']  = $v['answer'];
+                    Db::name('answer_flow')->insert($insert);
+                }
+                break;
+
+            case '2':
+                // 试卷二 [{“belong_to”:”1”,”correct”:”E1”,”error”:”E2”},{“belong_to”:”2”,”correct”:”E4”,”error”:”E5”}]
+                // 1 符合  0 不符合
+                foreach($bulk as $v){
+                    $insert['mark_id'] = $v['correct'];
+                    $insert['answer'] = 1;
+                    Db::name('answer_flow')->insert($insert);
+
+                    $insert['mark_id'] = $v['error'];
+                    $insert['answer'] = 0;
+                    Db::name('answer_flow')->insert($insert);
+                }
+                break;
+
+            default:
+                return error('参数错误');
+            break;
+        }
+
+        $data = Db::name('answer_flow')->getLastInsID();
+        return success($data);
+    }
+
+    // 完善信息接口
+    public function fill_info(Request $request){
+        if(check_param(['account','name','route','job'])) return error('参数缺失');
+        $user = new User();
+        $msk = $user->allowField(['name','route','job'])->save($_POST, ['id' => $this->user_id]);
+        if(!$msk) return error('修改失败');
+        $info = Db::name('user')->find($this->user_id);
+        unset($info['password']);
+
+        return success($info);
+    }
+
+    public function analyse(Request $request){
+
+        $user_id = $this->user_id;
+        // todo
+        $answer = db('answer_flow')->where(['user_id'=>$user_id])->select();
+        if(!$answer) return error('查无数据');
+        foreach($answer as $v){
+            if($v['test_id'] == 1) $test1[] = $v;
+            if($v['test_id'] == 2) $test2[] = $v;
+        }
+
+        $_topic = db('topic')->select();
+        foreach($_topic as $v){
+            $topic[$v['mark']] = $v;
+        }
+
+        foreach($test1 as $k=>$v){
+            $arr1[$k] = $topic[$v['mark_id']];
+            $arr1[$k]['answer'] = $v['answer'];
+        }
+        // son_1 试卷1 子维度得分
+        $son_1 = [];
+        foreach($arr1 as $k=>$v){
+            $son_1[$v['son_id']] = @$son_1[$v['son_id']]?$son_1[$v['son_id']]:0;
+            switch($v['answer']){
+                case '0':
+                    $son_1[$v['son_id']] -= 1;
+                    break;
+                case '1':
+                    $son_1[$v['son_id']] -= 1;
+                    break;
+                case '2':
+                    break;
+                case '3':
+                    $son_1[$v['son_id']] += 1;
+                    break;
+                default:
+                    $son_1[$v['son_id']] += 1;
+                    break;
+            }
+        }
+
+        foreach($test2 as $k=>$v){
+            $arr2[$k] = $topic[$v['mark_id']];
+            $arr2[$k]['answer'] = $v['answer'];
+        }
+
+        $son_2 = [];
+        foreach($arr2 as $k=>$v){
+            $son_2[$v['son_id']] = @$son_2[$v['son_id']]?$son_2[$v['son_id']]:0;
+            if($v['answer'] == 1){
+                $son_2[$v['son_id']] += 1;
+            }else{
+                $son_2[$v['son_id']] -= 1;
+            }
+        }
+
+        // 自维度原始得分
+        $_son = array_merge($son_1, $son_2);
+
+        foreach($_son as $k=>$v){
+            $son[$k]['son_id'] = $k;
+            $son[$k]['origin'] = $v;
+            $son[$k]['score']  = getScore($v);
+            $son[$k]['level']  = getLevel($v);
+        }
+        echo '<pre>'; print_r($son_2);die;
+        return $son_1;
+//        $data['created'] = date('Y-m-d H:i:s',time());
+//
+//        $data['test_id'] = 2;
+//        $data['user_id'] = 11;
+//
+//        for($i=1; $i<=45; $i++){
+//            $data['mark_id'] = 'E'.$i;
+//            $data['answer'] = $i%2;
+//            db('answer_flow')->insert($data);
+//        }
+    }
+
+    public function getPy(){
+        $request = $this->request;
+        return error('获取panhanlin的Py失败, 失败原因， py已被'.$request->param('name').'占用');
+    }
+}
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+
+

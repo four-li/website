@@ -1,0 +1,66 @@
+{extend name="common/base" /}
+
+{block name="main"}
+<div class="row">
+    <div class="col-sm-12">
+        <div class="wrapper wrapper-content animated fadeInUp">
+            <ul class="notes">
+                <li>
+                    <div class="label_div" data-url="{:url('geek_z1')}">
+                        <small>2017年11月3日(星期五) 下午2:14</small>
+                        <h4>3D图片切换特效</h4>
+                        <p> 戳进来！ </p>
+                        <a href="pin_board.html#"><i class="fa fa-trash-o "></i></a>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="label_div" data-url="{:url('geek_z2')}">
+                        <small>2017年11月6日(星期五) 下午10:14</small>
+                        <h4>粒子旋风</h4>
+                        <p> 戳进来！ </p>
+                        <a href="pin_board.html#"><i class="fa fa-trash-o "></i></a>
+                    </div>
+                </li>
+
+                <li>
+                    <div class="label_div" data-url="{:url('geek_z3')}">
+                        <small>2017年11月6日(星期五) 下午10:14</small>
+                        <h4>粒子图案-🌹</h4>
+                        <p> 戳进来！ </p>
+                        <a href="pin_board.html#"><i class="fa fa-trash-o "></i></a>
+                    </div>
+                </li>
+
+                {foreach name="list" item='v'}
+                <li>
+                    <div>
+                        <small>未知时间……</small>
+                        <h4>未知标题……</h4>
+                        <p>无查看内容权限……</p>
+                        <a href=""><i class="fa fa-trash-o "></i></a>
+                    </div>
+                </li>
+                {/foreach}
+
+            </ul>
+        </div>
+    </div>
+</div>
+{/block}
+
+{block name="js"}
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+
+<script>
+    $('.label_div').click(function(){
+        var url = $(this).data('url');
+        window.open(url);
+    })
+</script>
+{/block}

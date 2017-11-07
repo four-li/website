@@ -1,0 +1,53 @@
+<div class="row border-bottom " style="position: fixed; top:0; width: 100%;z-index:999;">
+    <nav class="navbar navbar-static-top" role="navigation" style="background: #c4cf9e;">
+        <div class="navbar-header" style="width: 50%;">
+            <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
+                <i class="fa fa-reorder"></i>
+            </button>
+            <a href="#" class="navbar-brand">☁️</a>
+        </div>
+        <div class="navbar-collapse collapse" id="navbar">
+            <ul class="nav navbar-nav">
+
+                {foreach name="nav_list" item="v" key="k" }
+                    {if condition="$v.url neq $action_name"}
+                        <li class="dropdown" >
+                    {else /}
+                        <li class="active" >
+                    {/if}
+                        <a aria-expanded="false" role="button" href="{:url($v['url'])}"> <i class="{$v.icon}"></i> {$k|default="$param1"} </a>
+                        </li>
+                {/foreach}
+
+                <li class="dropdown">
+                    <a aria-expanded="false" role="button" href="#" class="dropdown-toggle" data-toggle="dropdown"> 查看更多 <span class="caret"></span></a>
+                    <ul role="menu" class="dropdown-menu">
+                        <li><a href="{:url('about/info')}">详细资料</a>
+                        </li>
+                        <li><a href="{:url('about/team')}">团队</a>
+                        </li>
+                        <li><a href="{:url('skill/contact')}">联系我们</a>
+                        </li>
+                        <li><a href="{:url('news/index')}">新闻</a>
+                        </li>
+                    </ul>
+                </li>
+
+            </ul>
+            <ul class="nav navbar-top-links navbar-right">
+                <li>
+                    {if condition="$Think.session.user_id"}
+                    <a href="logput.html">
+                        <i class="fa fa-sign-out"></i> 退出
+                    </a>
+                    {else/}
+                    <a href="login.html">
+                        <i class="fa fa-sign-out"></i> 登录
+                    </a>
+                    {/if}
+                </li>
+            </ul>
+        </div>
+    </nav>
+</div>
+<div style="height: 51px;width: 100%;;"></div>

@@ -1,0 +1,83 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
+    <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
+    <title> indy.kernel.zby </title>
+    <meta name="keywords" content="~~~">
+    <meta name="description" content="~~~">
+    <link rel="shortcut icon" href="img/tit.ico">
+
+    {block name="css"}
+        <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+        <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+        <link href="css/animate.css" rel="stylesheet">
+        <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    {/block}
+
+</head>
+<body class="gray-bg top-navigation" style="background: url(https://img.laod.cn/wp-content/uploads/2017/05/bj.png) repeat top left scroll;">
+
+<div id="wrapper">
+    <div id="page-wrapper" class="gray-bg c_backgroud" >
+        {block name="head"}
+            {include file="common:nav" param1="参数1" /}
+        {/block}
+
+        {block name="main"}
+
+        {/block}
+
+
+        <div class="footer">
+            <div class="pull-right">
+                By：<a href="http://www.zi-han.net" target="_blank">fengGe</a>
+            </div>
+            <div>
+                <strong>Copyright</strong> zby &copy; 2017
+            </div>
+        </div>
+
+    </div>
+</div>
+
+{block name="js"}
+
+{/block}
+</body>
+
+<script type="text/javascript">
+    /* 鼠标点击特效 */
+    var a_idx = 0;
+    jQuery(document).ready(function($) {
+        $("html").click(function(e) {
+            var a = new Array("富强", "民主", "文明", "和谐", "自由", "平等", "公正" ,"法治", "爱国", "敬业", "诚信", "友善");
+            var $i = $("<span/>").text(a[a_idx]);
+            a_idx = (a_idx + 1) % a.length;
+            var x = e.pageX,
+                    y = e.pageY;
+            $i.css({
+                "z-index": 99999,
+                "top": y - 20,
+                "left": x,
+                "position": "absolute",
+                "font-weight": "bold",
+                "color": "#ff6651",
+                "font-size": "18px",
+                "width": "37px",
+            }).addClass('sk-spinner sk-spinner-rotating-plane').css({"background-color":"#000"});
+
+            $("body").append($i);
+            $i.animate({
+                        "top": y - 180,
+                        "opacity": 0
+                    },
+                    2500,
+                    function() {
+                        $i.remove();
+                    });
+        });
+    });
+</script>
+</html>

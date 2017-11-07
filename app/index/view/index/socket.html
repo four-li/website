@@ -1,0 +1,21 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="UTF-8">
+    <title></title>
+
+    <script type="text/javascript">
+        ws = new WebSocket("ws://47.88.212.231:2346");
+        ws.onopen = function() {
+            alert("连接成功");
+            ws.send('tom');
+            alert("给服务端发送一个字符串：tom");
+        };
+        ws.onmessage = function(e) {
+            alert("收到服务端的消息：" + e.data);
+        };
+    </script>
+</head>
+<body>
+</body>
+</html>
