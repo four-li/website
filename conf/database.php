@@ -9,13 +9,14 @@
 // | Author: liu21st <liu21st@gmail.com>
 // +----------------------------------------------------------------------
 
+# 开发模式 这个配置暂时废了 看场景配置吧
 return [
     // 开启断线重连  # 这个不知道屌不屌 。 看官方手册加的
     'break_reconnect' => true,
 
     // 数据库类型
     'type'            => 'mysql',
-//    // 服务器地址
+//    // 服务器地址 sibo
 //    'hostname'        => 'bdm3035615.my3w.com', bdm248126202.my3w.com
 //    // 数据库名
 //    'database'        => 'bdm3035615_db',
@@ -24,14 +25,24 @@ return [
 //    // 密码
 //    'password'        => 'sibo2017',
 
-    // 服务器地址
-    'hostname'        => 'bdm248126202.my3w.com',
+    // 服务器地址 w
+//    'hostname'        => 'bdm248126202.my3w.com',
+//    // 数据库名
+//    'database'        => 'bdm248126202_db',
+//    // 用户名
+//    'username'        => 'bdm248126202',
+//    // 密码
+//    'password'        => '826726721',
+
+        // 服务器地址 itry
+    'hostname'        => '47.88.212.231',
     // 数据库名
-    'database'        => 'bdm248126202_db',
+    'database'        => 'endless_schema',
     // 用户名
-    'username'        => 'bdm248126202',
+    'username'        => 'root',
     // 密码
-    'password'        => '826726721',
+    'password'        => 'ZhangLin123',
+
 
 //     服务器地址
 //    'hostname'        => '127.0.0.1',

@@ -14,6 +14,14 @@ function test(){
     echo '1';
 }
 
+// 获取时间格式
+function get_date($stream = null){
+    if($stream){
+        return date('Y-m-d H:i:s', $stream);
+    }
+    return date('Y-m-d H:i:s', time());
+}
+
 // 密码单向加密
 function md6($str){
     return substr(md5(\think\Config::get('app_sign_entry_string').$str),16);

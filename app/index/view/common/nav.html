@@ -1,21 +1,22 @@
 <div class="row border-bottom " style="position: fixed; top:0; width: 100%;z-index:999;">
     <nav class="navbar navbar-static-top" role="navigation" style="background: #c4cf9e;">
-        <div class="navbar-header" style="width: 50%;">
+        <div class="navbar-header" style="width: 64%;">
             <button aria-controls="navbar" aria-expanded="false" data-target="#navbar" data-toggle="collapse" class="navbar-toggle collapsed" type="button">
                 <i class="fa fa-reorder"></i>
             </button>
-            <a href="#" class="navbar-brand">☁️</a>
+            <a href="#" class="navbar-brand" style="height: 52px;">☁️</a>
         </div>
         <div class="navbar-collapse collapse" id="navbar">
-            <ul class="nav navbar-nav">
-
+            <div id="menu">
+                <ul class="nav navbar-nav">
                 {foreach name="nav_list" item="v" key="k" }
                     {if condition="$v.url neq $action_name"}
                         <li class="dropdown" >
                     {else /}
                         <li class="active" >
                     {/if}
-                        <a aria-expanded="false" role="button" href="{:url($v['url'])}"> <i class="{$v.icon}"></i> {$k|default="$param1"} </a>
+                        <a aria-expanded="false" role="button" href="{:url($v['url'])}"><img
+                                src="img/{$v['img']}.png" style="width:20px;" alt="">  </a>
                         </li>
                 {/foreach}
 
@@ -34,6 +35,8 @@
                 </li>
 
             </ul>
+            </div>
+
             <ul class="nav navbar-top-links navbar-right">
                 <li>
                     {if condition="$Think.session.user_id"}

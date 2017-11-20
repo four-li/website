@@ -62,26 +62,36 @@
                 </li>
 
                 <li>
-                    <a class="J_menuItem" href="{:url('topic/index1')}"><i class="fa fa-briefcase"></i> <span class="nav-label">试卷1</span></a>
-                </li>
-
-                <li>
-                    <a class="J_menuItem" href="{:url('topic/index2')}"><i class="fa fa-briefcase"></i> <span class="nav-label">试卷2</span></a>
-                </li>
-
-                <li>
                     <a href="#">
                         <i class="fa fa-home"></i>
-                        <span class="nav-label">维度</span>
+                        <span class="nav-label">配置</span>
                         <span class="fa arrow"></span>
                     </a>
                     <ul class="nav nav-second-level">
                         <li>
-                            <a class="J_menuItem" href="{:url('dimension/master')}" data-index="0">主维度</a>
+                            <a class="J_menuItem" href="{:url('conf/base')}" data-index="0">基础</a>
                         </li>
                         <li>
-                            <a class="J_menuItem" href="{:url('dimension/son')}">子维度</a>
+                            <a class="J_menuItem" href="{:url('conf/web')}">web</a>
                         </li>
+                        <li>
+                            <a class="J_menuItem" href="{:url('conf/admin_menu')}">菜单</a>
+                        </li>
+                        <li>
+                            <a href="#"> Auth <span class="fa arrow"></span></a>
+                            <ul class="nav nav-third-level">
+                                <li>
+                                    <a class="J_menuItem" href="{:url('conf/auth')}">权限</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="{:url('conf/role')}">角色</a>
+                                </li>
+                                <li>
+                                    <a class="J_menuItem" href="{:url('conf/route')}">路由</a>
+                                </li>
+                            </ul>
+                        </li>
+
                     </ul>
 
                 </li>
@@ -103,7 +113,7 @@
             </nav>
             </button>
 
-            <a href="login.html" onclick="return confirm('确定退出？');" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>
+            <!--<a href="login.html" onclick="return confirm('确定退出？');" class="roll-nav roll-right J_tabExit"><i class="fa fa fa-sign-out"></i> 退出</a>-->
         </div>
 
         <div class="row J_mainContent" id="content-main">
@@ -111,7 +121,10 @@
         </div>
     </div>
     <!--右侧部分结束-->
+</div>
 
+<div style="position:fixed;z-index:9999;right:15px;top:5px;">
+    <small class="right"><a  onclick="flushPage()" class="btn btn-danger btn-circle btn-outline" type="button"><i class="glyphicon glyphicon-refresh"></i></a></small>
 </div>
 
 <!-- 全局js -->
@@ -127,6 +140,26 @@
 
 <!-- 第三方插件 -->
 <script src="js/plugins/pace/pace.min.js"></script>
+
+<script>
+    // 这个刷新右帧页
+    function flushPage(){
+        var iframe = '';
+        $('.J_menuTab').each(function(){
+            if($(this).hasClass('active')){
+                urlId = $(this).data('id');
+                $('.J_iframe').each(function(){
+                    if($(this).data('id') == urlId){
+                        iframe = $(this).attr('name');
+//                      alert(iframe);
+                    }
+                })
+            }
+        })
+
+        window.parent.frames[iframe].location.reload()
+    }
+</script>
 
 </body>
 

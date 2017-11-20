@@ -1,10 +1,12 @@
 <?php
-    namespace app\common\Model;
+    namespace app\common\model;
 
     use traits\model\SoftDelete;
     class User extends \think\Model{
+
         protected $autoWriteTimestamp = 'datetime';
-        protected $createTime = 'created';
+        protected $createTime = 'create_time';
+//        protected $updateTime = 'update_time';
         protected $updateTime = false;
 
         // 页面输出 字段替换
@@ -17,4 +19,5 @@
         // 软删除
         use SoftDelete;
         protected $deleteTime = 'delete_time';
+
     }

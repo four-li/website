@@ -2,14 +2,15 @@
 namespace app\admin\controller;
 
 use app\admin\controller\Base as BaseController;
+use app\admin\model\Admin;
+use think\Config;
 use think\Request;
 
 class User extends BaseController
 {
-
     // 用户列表
     public function index(Request $request){
-        $user = new \app\common\Model\User();
+        $admin = new Admin();
         $where = '';
         if($request->has('keywords')){
             $sreach = $request->param('keywords');
@@ -18,10 +19,9 @@ class User extends BaseController
                 ];
         }
 
-        $list = $user->where($where)->paginate(4,false,[
+        $list = $admin->where($where)->paginate(4,false,[
             'query' => request()->param(),
         ])->each(function($item, $key){
-            $item['name'] = 'aindy';
             return $item;
         });
 
@@ -44,53 +44,19 @@ class User extends BaseController
         return $this->success('添加成功','demo','',1);
     }
 
-    public function answer_detail($id){
-        $data = \think\Db::name('answer_flow')->where(['user_id'=>$id])->order('answer desc')->select();
-        $topic = db('topic')->select();
-        $arr = [1=>[], 2=>[]];
-        $test_1 = '';$test_2='';
-        foreach($data as $v){
-            $arr[$v['test_id']][] = $v;
-        }
+    public function del_user(Request $request){
+        $user_id = $request->get('id');
+        // 软删除
+        $res = \app\admin\model\Admin::destroy($user_id);
 
-        $label = [
-            '1' => '符合',
-            '0' => '不符合',
-        ];
-
-        foreach($arr[2] as $k=>$v){
-            foreach($topic as $vv){
-                if($vv['mark'] == $v['mark_id']){
-                    $vv['label'] = $label[$v['answer']];
-                    $vv['date']  = $v['created'];
-                    $test_2[] = $vv;
-                }
-            }
-        }
-
-        $label = [
-            '4' => '完全符合',
-            '3' => '比较符合',
-            '2' => '一般符合',
-            '1' => '比较不符合',
-            '0' => '完全不符合',
-        ];
-
-        foreach($arr[1] as $k=>$v){
-            foreach($topic as $vv){
-               if($v['mark_id'] == $vv['mark']){
-                   $vv['label'] = $label[$v['answer']];
-                   $vv['date']  = $v['created'];
-                   $test_1[] = $vv;
-               }
-            }
-        }
-
-        $user = \app\common\Model\User::get($id);
-        $this->assign('user', $user->name);
-        $this->assign('one', $test_1);
-        $this->assign('two', $test_2);
-        return $this->fetch();
+        return success($res);
     }
 
+    public function test(){
+        return 'test';
+    }
+
+    public function demo(){
+        return 'demo';
+    }
 }

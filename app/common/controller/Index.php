@@ -23,4 +23,7 @@
             return '这里是common模块';
         }
 
+        public function commonAction(){
+            return '这是个公共方法';
+        }
     }

@@ -2,6 +2,7 @@
 namespace app\admin\controller;
 
 use app\admin\controller\Base as BaseController;
+use think\Session;
 
 class Index extends BaseController
 {

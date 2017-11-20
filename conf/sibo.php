@@ -1,28 +1,21 @@
 <?php
 
 return [
-    'work_address' => 'home',
-
-    // 视图输出字符串内容替换
-    'view_replace_str'       => [
-        'css/'       => '/indy_blog_dev_version/public/static/admin/css/',
-        'js/'        => '/indy_blog_dev_version/public/static/admin/js/',
-        'img/'       => '/indy_blog_dev_version/public/static/admin/img/',
-    ],
+    'work_address' => 'itry',
 
     'database'=> [
         // 开启断线重连  # 这个不知道屌不屌 。 看官方手册加的
         'break_reconnect' => true,
         // 数据库类型
         'type' => 'mysql',
-        // 服务器地址 w
-        'hostname'        => 'bdm248126202.my3w.com',
+        // 服务器地址 sibo
+        'hostname'        => 'bdm3035615.my3w.com',
         // 数据库名
-        'database'        => 'bdm248126202_db',
+        'database'        => 'bdm3035615_db',
         // 用户名
-        'username'        => 'bdm248126202',
+        'username'        => 'bdm3035615',
         // 密码
-        'password'        => '826726721',
+        'password'        => 'sibo2017',
         // 连接dsn
         'dsn' => '',
         // 数据库连接参数 # 这里面可以

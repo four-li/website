@@ -12,32 +12,30 @@
         // 前端页面 头部菜单
         'nav_list' => [
             '主页' => [
+                'img' => '1',
                 'url' => 'Index/index',
                 'icon' => 'fa fa-home',
             ],
 
             '博客' => [
+                'img' => '2',
                 'url' => 'Blog/index',
                 'icon' => 'fa fa-file-text-o',
             ],
             'geek' => [
+                'img' => '3',
                 'url' => 'Geek/index',
                 'icon' => 'fa fa-krw',
             ],
             '最新' => [
+                'img' => '4',
                 'url' => 'Current/index',
                 'icon' => 'fa fa-cc-amex',
             ],
             '关于' => [
+                'img' => '5',
                 'url' => 'About/index',
                 'icon' => 'fa fa-cc-amex',
             ],
-        ],
-
-        // 视图输出字符串内容替换
-        'view_replace_str'       => [
-            'css/'       => '/indy_blog_dev_version/public/static/admin/css/',
-            'js/'        => '/indy_blog_dev_version/public/static/admin/js/',
-            'img/'       => '/indy_blog_dev_version/public/static/admin/img/',
         ],
     ];

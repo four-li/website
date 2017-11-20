@@ -2,19 +2,22 @@
     namespace app\api\controller;
 
     use app\api\controller\Base as BaseController;
+    use think\Cache;
     use think\Request;
     use think\Db;
 
     class Index extends BaseController{
-
         public function index(){
-            $this->check_token();
+            $redis = new \RedisDb();
+            $redis->setex('name','10','老陈~ob');
+            echo $redis->get('name');
+//            $this->check_token();
         }
 
         public function news($id = 1){
             // 启动 路由
-            echo url('index/news', ['id'=>$id]).'<hr/>';
-            return $id;
+            // ecs.c-cf.cn/public/news/44
+            return url('index/news', ['id'=>$id]).'<hr/>';
         }
 
         public function demo(){
@@ -28,7 +31,6 @@
             $data = ['name'=>'idy', 'password'=>'asd'];
             // insertGetId() 插入一条数据并返回最后id
             Db::name('user')->insertGetId($data);
-
             // 插入多条数据
             Db::name('user')->insertAll($data);
 

@@ -1,13 +1,19 @@
 <?php
 
 return [
-    'work_address' => 'home',
+    'work_address' => 'ecs',
 
     // 视图输出字符串内容替换
     'view_replace_str'       => [
-        'css/'       => '/indy_blog_dev_version/public/static/admin/css/',
-        'js/'        => '/indy_blog_dev_version/public/static/admin/js/',
-        'img/'       => '/indy_blog_dev_version/public/static/admin/img/',
+        'css/'       => '/static/admin/css/',
+        'js/'        => '/static/admin/js/',
+        'img/'       => '/static/admin/img/',
+    ],
+
+    'redis_conf' => [
+        'port'     => '6379',
+        'host'     => '47.96.4.101',
+        'auth_pwd' => 'indy', // requireAuth密码
     ],
 
     'database'=> [
@@ -15,14 +21,24 @@ return [
         'break_reconnect' => true,
         // 数据库类型
         'type' => 'mysql',
-        // 服务器地址 w
-        'hostname'        => 'bdm248126202.my3w.com',
+        // 服务器地址 ecs
+//        'hostname'        => '47.96.4.101',
+        'hostname'        => '127.0.0.1',
         // 数据库名
-        'database'        => 'bdm248126202_db',
+        'database'        => 'blog',
         // 用户名
-        'username'        => 'bdm248126202',
+        'username'        => 'root',
         // 密码
-        'password'        => '826726721',
+        'password'        => 'indy',
+    // ==============
+//        'hostname'        => '47.88.212.231',
+//        // 数据库名
+//        'database'        => 'endless_schema',
+//        // 用户名
+//        'username'        => 'root',
+//        // 密码
+//        'password'        => 'ZhangLin123',
+    // ===============
         // 连接dsn
         'dsn' => '',
         // 数据库连接参数 # 这里面可以

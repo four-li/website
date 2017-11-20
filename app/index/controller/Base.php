@@ -16,6 +16,11 @@ class Base extends CommonController
         $this->check_apply_conf();
     }
 
+    // 空方法
+    public function _empty(){
+        $this->redirect('error/index');
+    }
+
     // 应用配置检查
     public function check_apply_conf(){
         $_conf = \think\Db::name('apply_conf')->select();

@@ -7,7 +7,6 @@ class Worker extends Server
 {
     protected $socket = 'websocket://47.88.212.231:2346';
 
-
     /**
      * 收到信息
      * @param $connection
@@ -15,7 +14,7 @@ class Worker extends Server
      */
     public function onMessage($connection, $data)
     {
-        $connection->send('我收到你的信息了 ---> '.$data);
+        $connection->send('我收到了: ---> '.$data);
     }
 
     /**

@@ -13,7 +13,15 @@ return [
     // +----------------------------------------------------------------------
     // | 应用设置
     // +----------------------------------------------------------------------
-    'app_auther'             => 'indy',
+    
+    // 应用模式状态 环境配置 ++ #  切换 home 和 office ，itry, sibo, ecs
+    'app_status'             => 'ecs',
+
+    // 开发状态  prod 模式后 会打开许多验证
+    'dev_status' => 'dev',
+
+    'app_auther'             => 'ccf.kernel.zby',
+    'index_page_title'      => 'ccf_ker_zby',
 
     // 多数据库配置
     //数据库配置1
@@ -33,11 +41,10 @@ return [
         // 数据库表前缀
         'prefix'      => '',
     ],
+
     //数据库配置2
     'db_config2' => 'mysql://root:1234@localhost:3306/thinkphp#utf8',
 
-    // 应用模式状态 环境配置 ++ #  切换 home 和 office
-    'app_status'             => 'home',
     // 应用命名空间
     'app_namespace'          => 'app',
     // 应用调试模式
@@ -207,11 +214,11 @@ return [
 
     'cache'                  => [
         // 驱动方式
-        'type'   => 'File',
+        'type'   => 'redis',
         // 缓存保存目录
         'path'   => CACHE_PATH,
         // 缓存前缀
-        'prefix' => '',
+        'prefix' => 'indy_',
         // 缓存有效期 0表示永久缓存
         'expire' => 0,
     ],
@@ -265,8 +272,8 @@ return [
 
     // 视图输出字符串内容替换
     'view_replace_str'       => [
-        'css/'       => '/indy_blog_dev_version/public/static/admin/css/',
-        'js/'        => '/indy_blog_dev_version/public/static/admin/js/',
-        'img/'       => '/indy_blog_dev_version/public/static/admin/img/',
+//        'css/'       => '/indy_blog_dev_version/public/static/admin/css/',
+//        'js/'        => '/indy_blog_dev_version/public/static/admin/js/',
+//        'img/'       => '/indy_blog_dev_version/public/static/admin/img/',
     ],
 ];

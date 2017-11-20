@@ -2,16 +2,21 @@
 namespace app\admin\controller;
 
 use app\admin\controller\Base as BaseController;
-use app\common\Model\User;
-use think\Request;
+use think\Config;
+use think\Db;
 
 class Ajax extends BaseController
 {
-    public function del_user(Request $request){
-        $user_id = $request->get('id');
-        // 软删除
-        $res = User::destroy($user_id);
+    // ajax查询 不限权限
+    public function _initialize(){
+        parent::_initialize();
+        Config::set('default_return_type','json');
+    }
 
-        return success($res);
+    public function set_status($model, $id, $status){
+        $save_status = $status?'0':'1';
+        $ret = Db::name($model)->where(['id'=>$id])->update(['status'=>$save_status]);
+        if(!$ret) return ['code'=>500 ];
+        return json(['status'=>$save_status,'code'=>0 ]);
     }
 }

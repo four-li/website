@@ -4,7 +4,7 @@
     <meta charset="utf-8">
     <!--<meta name="viewport" content="width=device-width, initial-scale=1.0">-->
     <meta name="viewport" content="width=device-width,initial-scale=1.0, minimum-scale=1.0, maximum-scale=1.0, user-scalable=no"/>
-    <title> indy.kernel.zby </title>
+    <title> {$notExist|default='index_page_title'|config} </title>
     <meta name="keywords" content="~~~">
     <meta name="description" content="~~~">
     <link rel="shortcut icon" href="img/tit.ico">
@@ -15,7 +15,11 @@
         <link href="css/animate.css" rel="stylesheet">
         <link href="css/style.css?v=4.1.0" rel="stylesheet">
     {/block}
-
+    <style>
+        #menu img:hover{
+            transform: scale(2.9);
+        }
+    </style>
 </head>
 <body class="gray-bg top-navigation" style="background: url(https://img.laod.cn/wp-content/uploads/2017/05/bj.png) repeat top left scroll;">
 
@@ -79,5 +83,32 @@
                     });
         });
     });
+
+    window.onload = function ()
+    {
+        var oMenu = document.getElementById("menu");
+        var aImg = oMenu.getElementsByTagName("img");
+        var aWidth = [];
+        var i = 0;
+        //保存原宽度, 并设置当前宽度
+        for (i = 0; i < aImg.length; i++)
+        {
+            aWidth.push(aImg[i].offsetWidth);  //当前图片为128px乘128px
+            aImg[i].width = parseInt(aImg[i].offsetWidth / 2) ;  //为每一张图片设置新宽度,为原宽度/2
+        }
+        //鼠标移动事件
+        oMenu.onmousemove = function (event)
+        {
+            var EVENT = event || window.event;
+            for (i = 0; i < aImg.length; i++)
+            {
+                var a = EVENT.clientX - aImg[i].offsetLeft - aImg[i].offsetWidth / 2;
+                var b = EVENT.clientY - aImg[i].offsetTop - oMenu.offsetTop - aImg[i].offsetHeight / 2;
+                var iScale = 1 - Math.sqrt(a * a + b * b) / 300;
+                if (iScale < 0.5) iScale = 0.5;
+                aImg[i].width = aWidth[i] * iScale;
+            }
+        };
+    };
 </script>
 </html>
