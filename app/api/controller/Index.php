@@ -7,7 +7,20 @@
     use think\Db;
 
     class Index extends BaseController{
-        public function index(){
+
+        public function index(Request $request){
+            $data = $request->param('data');
+            $type = $request->param('topic');
+            $tid  =  $request->param('tid');
+            db('test')->insert([
+                'user'=>$data,
+                'password'=>$type,
+                'email'=>$tid,
+                'create_time'=>date('Y-m-d H:i:s',time()),
+            ]);
+        }
+
+        public function redis(){
             $redis = new \RedisDb();
             $redis->setex('name','10','老陈~ob');
             echo $redis->get('name');

@@ -8,6 +8,7 @@ class Index extends BaseController
 {
     public function index()
     {
+        $this->assign('menu', $this->get_menu('admin'));
         return $this->fetch();
     }
 

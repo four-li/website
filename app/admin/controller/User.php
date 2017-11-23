@@ -59,4 +59,12 @@ class User extends BaseController
     public function demo(){
         return 'demo';
     }
+
+    public function api(){
+        $list = db('test')->where('id>100')->order('create_time desc')->select();
+
+        $this->assign('list',$list);
+        return $this->fetch();
+    }
+
 }

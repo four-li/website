@@ -47,83 +47,40 @@ class Conf extends BaseController
 
     # === 菜单
     public function admin_menu(){
-        $menu = [
-            '用户' => [
-                'title'  => '用户',
-                'route'    => 'admin/User',
-                'status' => 1,
-                'level'  => 0,
-                'show'   => 1,
-                'son'    => [
-                    [
-                        'title'  => '用户列表',
-                        'route'    => 'admin/User/index',
-                        'status' => 1,
-                        'level'  => 1,
-                        'is_show' => 1,
-                        'is_assign' => 0,
-                    ],
-                    [
-                        'title'  => '用户编辑',
-                        'route'    => 'admin/User/edit',
-                        'status' => 1,
-                        'level'  => 1,
-                        'show'   => 0,
-                        'is_assign' => 0,
-                    ],
-                    [
-                        'title'  => '用户新增',
-                        'route'    => 'admin/User/add',
-                        'status' => 1,
-                        'level'  => 1,
-                        'show'   => 0,
-                        'is_assign' => 0,
-                    ],
-                    [
-                        'title'  => '用户删除',
-                        'route'    => 'admin/User/del',
-                        'status' => 1,
-                        'level'  => 1,
-                        'show'   => 0,
-                        'is_assign' => 0,
-                    ],
-                ],
-            ],
-        ];
+//        $memu = $this->get_menu('admin');
 
-        $res = Db::name('manager_menu')->where([
-            'is_show' => 1,
-            'status'  => 1,
-        ])->select();
+        $res = Db::name('manager_menu')->where(['status'=>1,'is_show'=>1])->select();
 
-        foreach($res as $v){
-
-            if($v['has_view']){
-                echo $v['title'];
-            }
-            foreach($res as $vv){
-
-            }
-
-            echo '<br>';
+        foreach($res as $k=>$v){
+            $menu[$v['level']][] = $v;
         }
 
-//        echo '<pre>';
-//        dump($res);
-        $this->assign('list', $menu);
-        return $this->fetch();
     }
 
-    # === 权限 角色 组
+    # === 权限 规则 组
     public function auth(){
+        // 角色分配至组
         return $this->fetch();
     }
 
-    public function role(){
+    public function rule(){
+        // curd 规则 和 菜单
+        $res = Db::name('manager_menu')->select();
+
+        foreach($res as $k=>$v){
+            if($v['pid'] == 0){
+                $res[$k]['controller'] = ltrim($v['route'],'admin/');
+            }else{
+                $res[$k]['action'] = @explode('/', $v['route'])['2']?explode('/', $v['route'])['2']:' - ';
+            }
+        }
+
+        $this->assign('list', $res);
+
         return $this->fetch();
     }
 
-    public function route(){
+    public function group(){
         return $this->fetch();
     }
 }

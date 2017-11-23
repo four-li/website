@@ -1,0 +1,290 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+
+    <title>H+ 后台主题UI框架 - 树形视图</title>
+
+    <meta name="keywords" content="H+后台主题,后台bootstrap框架,会员中心主题,后台HTML,响应式后台">
+    <meta name="description" content="H+是一个完全响应式，基于Bootstrap3最新版本开发的扁平化主题，她采用了主流的左右两栏式布局，使用了Html5+CSS3等现代技术">
+
+    <link rel="shortcut icon" href="favicon.ico"> <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/jsTree/style.min.css" rel="stylesheet">
+    <link href="css/plugins/iCheck/custom.css" rel="stylesheet">
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+    <link rel="stylesheet" href="css/jquery.contextMenu.css" />
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content  animated fadeInRight">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-content">
+
+                    <strong>jsTree</strong>是一个基于jQuery的Tree控件。支持 XML，JSON，Html三种数据源。提供创建，重命名，移动，删除，拖放节点操作。可以自己自定义创建，删除，嵌套，重命名，选择节点的规则。在这些操作上可以添加多种监听事件。
+                    <br>更多信息请访问： <a href="http://www.jstree.com/" target="_blank">http://www.jstree.com/</a>
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <div class="row">
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>后台菜单 <small class="text-navy"> 鼠标在文件树上右键编辑 </small></h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <h1 class="box11">右击我</h1>
+                    <div id="jstree1">
+                        <ul>
+                            <li class="jstree-open box11">admin
+                                <ul>
+                                    {foreach name="list" item="v"}
+                                        {if condition="$v.pid == '0'"}
+                                            <li class="box11"> {$v.controller}: {$v.title}
+                                                <ul>
+                                                {foreach name="list" item="vv"}
+                                                    {if condition="$vv.pid == $v.id and $vv.has_view == 1"}
+                                                        <li class="text-navy box11" data-jstree='{"type":"html"}'>{$vv.action}: {$vv.title}</li>
+                                                    {elseif condition="$vv.pid == $v.id and $vv.has_view == 0 "/}
+                                                        <li class="box11" data-jstree='{"type":"son"}'> {$vv.action}: {$vv.title}
+                                                            <ul>
+                                                                {foreach name="list" item="vvv"}
+                                                                    {if condition="$vvv.pid == $vv.id and $vvv.has_view == 1"}
+                                                                    <li class="text-navy box11" data-jstree='{"type":"html"}'>{$vvv.action}: {$vvv.title}</li>
+                                                                    {/if}
+                                                                {/foreach}
+                                                            </ul>
+                                                        </li>
+                                                    {/if}
+                                                {/foreach}
+                                                </ul>
+                                            </li>
+                                        {/if}
+                                    {/foreach}
+
+                                    <!--<li>Conf-->
+                                        <!--<ul>-->
+                                            <!--<li data-jstree='{"type":"html"}'>web</li>-->
+                                            <!--<li data-jstree='{"type":"html"}'>auth</li>-->
+                                            <!--<li data-jstree='{"type":"html"}'>rule</li>-->
+                                            <!--<li data-jstree='{"type":"html"}'>group</li>-->
+                                        <!--</ul>-->
+                                    <!--</li>-->
+                                </ul>
+                            </li>
+                        </ul>
+                    </div>
+
+                </div>
+            </div>
+        </div>
+        <div class="col-sm-6">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5>添加规则</h5>
+                    <div class="ibox-tools">
+                        <a class="collapse-link">
+                            <i class="fa fa-chevron-up"></i>
+                        </a>
+                        <a class="close-link">
+                            <i class="fa fa-times"></i>
+                        </a>
+                    </div>
+                </div>
+
+                <div class="ibox-content">
+                    <form method="post" class="form-horizontal">
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">普通</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">提示</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="提示信息" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">提示</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="提示信息" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">提示</label>
+
+                            <div class="col-sm-10">
+                                <input type="text" placeholder="提示信息" class="form-control">
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">复选框</label>
+                            <div class="col-sm-10">
+                                <div class="checkbox i-checks">
+                                    <label>
+                                        <input type="checkbox" value=""> <i></i> 选项1</label>
+                                </div>
+                                <div class="checkbox i-checks">
+                                    <label>
+                                        <input type="checkbox" value="" checked=""> <i></i> 选项2（选中）</label>
+                                </div>
+
+                                <div class="radio i-checks">
+                                    <label>
+                                        <input type="radio" value="option1" name="a"> <i></i> 选项1</label>
+                                </div>
+                                <div class="radio i-checks">
+                                    <label>
+                                        <input type="radio" checked="" value="option2" name="a"> <i></i> 选项2（选中）</label>
+                                </div>
+
+                            </div>
+                        </div>
+                        <div class="hr-line-dashed"></div>
+                        <div class="form-group">
+                            <div class="col-sm-4 col-sm-offset-2">
+                                <button class="btn btn-primary" type="submit">添加</button>
+                            </div>
+                        </div>
+                    </form>
+                </div>
+            </div>
+        </div>
+    </div>
+
+
+</div>
+
+
+<!-- 全局js -->
+<script src="js/jquery.min.js?v=2.1.4"></script>
+<script src="js/bootstrap.min.js?v=3.3.6"></script>
+
+<!-- 自定义js -->
+<script src="js/content.js?v=1.0.0"></script>
+
+<!-- jsTree plugin javascript -->
+<script src="js/plugins/jsTree/jstree.min.js"></script>
+<!-- iCheck -->
+<script src="js/plugins/iCheck/icheck.min.js"></script>
+
+<script src="js/jquery.contextMenu.min.js"></script>
+<script>
+    $(document).ready(function () {
+        $('.i-checks').iCheck({
+            checkboxClass: 'icheckbox_square-green',
+            radioClass: 'iradio_square-green',
+        });
+    });
+</script>
+<script>
+
+
+
+    $(document).ready(function () {
+
+        $('#jstree1').jstree({
+            'core': {
+                'check_callback': true
+            },
+            'plugins': ['types', 'dnd'],
+            'types': {
+                'default': {
+                    'icon': 'fa fa-folder'
+                },
+                'son':{
+                    'icon': 'fa fa-folder-o'
+                },
+                'html': {
+                    'icon': 'fa fa-file-code-o'
+                },
+                'svg': {
+                    'icon': 'fa fa-file-picture-o'
+                },
+                'css': {
+                    'icon': 'fa fa-file-code-o'
+                },
+                'img': {
+                    'icon': 'fa fa-file-image-o'
+                },
+                'js': {
+                    'icon': 'fa fa-file-text-o'
+                }
+
+            }
+        });
+
+        $(".box11").contextMenu({
+            menu: [{
+                text: "新增",
+                callback: function() {
+                    alert(a)
+                }
+            },
+                {
+                    text: "复制",
+                    callback: function() {
+                        alert("复制");
+                    }
+                },
+                {
+                    text: "粘贴",
+                    callback: function() {
+                        alert("粘贴");
+                    }
+                },
+                {
+                    text: "删除",
+                    callback: function() {
+                        alert("删除");
+                    }
+                }
+            ],
+        });
+
+    });
+</script>
+<style>
+    .jstree-open > .jstree-anchor > .fa-folder:before {
+        content: "\f07c";
+    }
+
+    .jstree-default .jstree-icon.none {
+        width: 0;
+    }
+</style>
+
+</body>
+
+</html>

@@ -58,44 +58,49 @@
                 </li>
 
                 <li>
-                    <a class="J_menuItem" href="{:url('user/index')}"><i class="fa fa-user"></i> <span class="nav-label">用户</span></a>
+                    <a class="J_menuItem" href="{:url('user/api')}"><i class="fa fa-user"></i> <span class="nav-label">onsLog</span></a>
                 </li>
 
-                <li>
-                    <a href="#">
-                        <i class="fa fa-home"></i>
-                        <span class="nav-label">配置</span>
-                        <span class="fa arrow"></span>
-                    </a>
-                    <ul class="nav nav-second-level">
+                {foreach name="menu" item="v" key="k" }
+                    {if condition="$v.level == '1' and $v.has_view == 1 "}
                         <li>
-                            <a class="J_menuItem" href="{:url('conf/base')}" data-index="0">基础</a>
+                            <a class="J_menuItem" href="{:url($v['route'])}">{$v.icon} <span class="nav-label">{$v.title}</span></a>
                         </li>
+                    {elseif condition="$v.level == '1' and $v.has_view == 0 "/}
                         <li>
-                            <a class="J_menuItem" href="{:url('conf/web')}">web</a>
-                        </li>
-                        <li>
-                            <a class="J_menuItem" href="{:url('conf/admin_menu')}">菜单</a>
-                        </li>
-                        <li>
-                            <a href="#"> Auth <span class="fa arrow"></span></a>
-                            <ul class="nav nav-third-level">
-                                <li>
-                                    <a class="J_menuItem" href="{:url('conf/auth')}">权限</a>
-                                </li>
-                                <li>
-                                    <a class="J_menuItem" href="{:url('conf/role')}">角色</a>
-                                </li>
-                                <li>
-                                    <a class="J_menuItem" href="{:url('conf/route')}">路由</a>
-                                </li>
+                            <a href="#">
+                                {$v.icon}
+                                <span class="nav-label">{$v.title}</span>
+                                <span class="fa arrow"></span>
+                            </a>
+
+                            <ul class="nav nav-second-level">
+                                {foreach name="v.c" item="vv"}
+                                    {if condition="$vv.level == '2' and $vv.has_view == 1 "}
+                                    <li>
+                                        <a class="J_menuItem" href="{:url($vv['route'])}"><span class="nav-label">{$vv.title}</span></a>
+                                    </li>
+                                    {elseif condition="$vv.level == '2' and $vv.has_view == 0 "/}
+                                    <li>
+                                        <a href="{:url($vv['route'])}"> {$vv.title} <span class="fa arrow"></span></a>
+                                        <ul class="nav nav-third-level">
+                                        {foreach name="vv.c" item="vvv"}
+                                            {if condition="$vvv.level == '3' and $vvv.has_view == 1 "}
+                                            <li>
+                                                <a class="J_menuItem" href="{:url($vvv['route'])}">{$vvv.title}</a>
+                                            </li>
+                                            {/if}
+                                        {/foreach}
+                                        </ul>
+                                    </li>
+                                    {/if}
+
+                                {/foreach}
                             </ul>
                         </li>
-
-                    </ul>
-
-                </li>
-
+                    {/if}
+                {/foreach}
+                
             </ul>
         </div>
     </nav>

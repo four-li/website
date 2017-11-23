@@ -6,20 +6,6 @@
 
     class User extends \app\common\controller\Index
     {
-        public function Index(){
-            $arr = [
-                ['belong_to'=>'1', 'correct' => 'E1' , 'error' => 'E2'],
-                ['belong_to'=>'2', 'correct' => 'E4' , 'error' => 'E5'],
-            ];
-
-            $arr1 = [
-                ['yes'=>['E1','E4']],
-                ['no'=>['E2','E5']],
-            ];
-
-            return $arr1;
-        }
-
         // 注册
         public function register(Request $request){
             if(check_param(['account','password'])) return error('参数缺失');
