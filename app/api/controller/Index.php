@@ -9,6 +9,7 @@
     class Index extends BaseController{
 
         public function index(Request $request){
+            sleep(4);
             $data = $request->param('data');
             $type = $request->param('topic');
             $tid  =  $request->param('tid');
@@ -18,6 +19,8 @@
                 'email'=>$tid,
                 'create_time'=>date('Y-m-d H:i:s',time()),
             ]);
+
+            return 'success';
         }
 
         public function redis(){
