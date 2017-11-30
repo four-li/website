@@ -1,0 +1,230 @@
+<!DOCTYPE html>
+<html>
+
+<head>
+
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+
+    <title> 管理员列表 </title>
+
+    <link rel="shortcut icon" href="favicon.ico">
+    <link href="css/bootstrap.min.css?v=3.3.6" rel="stylesheet">
+    <link href="css/font-awesome.css?v=4.4.0" rel="stylesheet">
+    <link href="css/plugins/footable/footable.core.css" rel="stylesheet">
+    <link href="css/plugins/sweetalert/sweetalert.css" rel="stylesheet">
+    <link href="css/plugins/switchery/switchery.css" rel="stylesheet">
+
+    <link href="css/animate.css" rel="stylesheet">
+    <link href="css/style.css?v=4.1.0" rel="stylesheet">
+
+</head>
+
+<body class="gray-bg">
+<div class="wrapper wrapper-content animated fadeInRight">
+
+    <div class="row">
+        <div class="col-sm-12">
+            <div class="ibox float-e-margins">
+                <div class="ibox-title">
+                    <h5><button class="btn btn-info btn-xs" data-toggle="modal" data-target="#myModal">添加</button></h5>
+
+                    <div class="ibox-tools">
+                        <form action="" method="post">
+                            <input type="text" name='keywords'>
+                            <input type="submit" class="btn btn-outline btn-info btn-xs">
+                        </form>
+                    </div>
+                </div>
+                <div class="ibox-content">
+                    <table class="footable table table-stripped toggle-arrow-tiny" data-page-size="999">
+                        <thead>
+                        <tr>
+                            <th data-toggle="true">编号</th>
+                            <th>账号</th>
+                            <th>名字</th>
+                            <th>当前</th>
+                            <th>详情</th>
+                            <th>启用</th>
+                            <th>删除</th>
+
+                            <th data-hide="all">　头像　</th>
+                            <th data-hide="all">注册日期</th>
+                            <th data-hide="all">最后登录</th>
+                            <th data-hide="all">　登录ip</th>
+                            <th data-hide="all">认证状态</th>
+                        </tr>
+
+                        </thead>
+                        <tbody>
+                        {foreach name="list" item="v" key="k" }
+                        <tr data-id="{$v.id}" class='del_{$v.id}'>
+                            <td> {$v.id} </td>
+                            <td> {$v.account} </td>
+                            <td>{$v.adminItem.name}</td>
+                            <td>{$v.offline}</td>
+                            <td>
+                                <div class="btn-group">
+                                    <button data-toggle="dropdown" class="btn btn-outline btn-info btn-sm dropdown-toggle"> 查看 <span class="caret"></span>
+                                    </button>
+                                    <ul class="dropdown-menu">
+                                        <li><a class="btn btn-outline btn-sm  btn-success J_menuItem" href="{:url('answer_detail',['id'=>$v['id']])}"><i class='glyphicon glyphicon-film'>　答题记录</i></a>
+                                        </li>
+                                    </ul>
+                                </div>
+                            </td>
+                            <td><input type="checkbox" value="{$v.status}" class="js-switch is_disabled" {if condition="$v.status == '1' "} checked {/if} /></td>
+                            <td> <button serial='{$v.id}' class='btn btn-outline btn-danger btn-sm demo4'>删除</button> </td>
+                            <td><img style="margin-bottom: 10px;" width="70" class="img-circle" src="img/admin_photo/{$v.adminItem.photo}" alt="加载出错"></td>
+                            <td>{$v.create_time}</td>
+                            <td>{$v.last_login_time}</td>
+                            <td>{$v.last_login_ip}</td>
+                            <td>
+                                <a><i class="fa fa-check text-navy"></i>{$v.status}</a>
+                            </td>
+                        </tr>
+                        {/foreach}
+
+                        </tbody>
+
+                        <tfoot><tr style="display:none;"><td colspan="7"><div class="row"><div class="col-md-12 text-center"><nav class='my_page'><ul class="pagination"></ul></nav></div></div></td></tr></tfoot>
+
+                    </table>
+
+                    <div style="width:100%; text-align: center">
+                        {$list->render()}
+                    </div>
+
+                </div>
+            </div>
+        </div>
+    </div>
+
+    <!-- Modal -->
+    <div class="modal fade" id="myModal" tabindex="-1" role="dialog" aria-labelledby="myModalLabel">
+        <div class="modal-dialog" role="document">
+            <div class="modal-content">
+                <div class="modal-header">
+                    <button type="button" class="close" data-dismiss="modal" aria-label="Close"><span aria-hidden="true">&times;</span></button>
+                    <h4 class="modal-title" id="myModalLabel">新增用户</h4>
+                </div>
+                <form action="{:url('add')}" id="add_form_c" method="post" class="form-horizontal">
+                    <div class="modal-body row" style="">
+
+
+                        <label class="col-sm-3 control-label">账号：</label>
+                        <div class="col-sm-9">
+                            <input type="text" name="account" value="11" class="form-control" placeholder="请输入账号">
+                        </div>
+
+                        <div class="hr-line-dashed col-sm-12"></div>
+
+                        <label class="col-sm-3 control-label">密码：</label>
+                        <div class="col-sm-9">
+                            <input type="password" name="password_1" class="form-control" placeholder="请输入密码">
+                        </div>
+
+                        <div class="hr-line-dashed col-sm-12"></div>
+
+                        <label class="col-sm-3 control-label">重复密码：</label>
+                        <div class="col-sm-9">
+                            <input type="password" name="password_2" class="form-control" placeholder="请输入密码">
+                        </div>
+                    </div>
+                    <div class="modal-footer">
+                        <button type="button" class="btn btn-default" data-dismiss="modal">Close</button>
+                        <input type="submit" id="submit_add" class="btn btn-success" value="保存"/>
+                    </div>
+                </form>
+            </div>
+        </div>
+    </div>
+
+
+    <!-- 全局js -->
+    <script src="js/jquery.min.js?v=2.1.4"></script>
+    <script src="js/bootstrap.min.js?v=3.3.6"></script>
+    <script src="js/plugins/footable/footable.all.min.js"></script>
+
+    <!-- 自定义js -->
+    <script src="js/content.js?v=1.0.0"></script>
+    <!-- Switchery -->
+    <script src="js/plugins/switchery/switchery.js"></script>
+
+    <!-- Sweet alert -->
+    <script src="js/plugins/sweetalert/sweetalert.min.js"></script>
+
+    <script>
+
+        var elems = Array.prototype.slice.call(document.querySelectorAll('.js-switch'));
+
+        elems.forEach(function(html) {
+            var switchery = new Switchery(html);
+        });
+
+        $('.is_disabled').change(function(){
+            var _this = $(this);
+            var id = _this.parent().parent().data('id');
+            var status = _this.val();
+            $.ajax({
+                url: "{:url('ajax/set_status')}",
+                data: { model:'admin',id:id, status:status },
+                type: 'POST',
+                success: function(data) {
+                    if(data.code == 0 ){
+                        _this.val(data.status);
+                    }else{
+                        window.location.reload(true);
+                    }
+                }
+            })
+        })
+
+        $(document).ready(function() {
+//
+            $('.footable').footable();
+            $('.footable2').footable();
+
+            $('.demo4').click(function () {
+                var id = $(this).attr('serial');
+                swal({
+                            title: "您确定要删除这条信息吗",
+                            text: "删除后将无法恢复，请谨慎操作！",
+                            type: "warning",
+                            showCancelButton: true,
+                            confirmButtonColor: "#DD6B55",
+                            confirmButtonText: "是的，我要删除！",
+                            cancelButtonText: "让我再考虑一下…",
+                            closeOnConfirm: false,
+                            closeOnCancel: false
+                        },
+
+                        function (isConfirm) {
+                            // 返回结果
+                            if (isConfirm) {
+                                $.get("{:url('Ajax/del_user')}", {
+                                    id: id
+                                }, function (e) {
+                                    if (e) {
+                                        swal("删除成功！", "您已经删除了这条信息。", "success");
+                                        $('.del_' + id).remove();
+                                    } else {
+                                        swal("删除失败", "删除出错", "error");
+                                    }
+                                })
+                            } else {
+                                swal("已取消", "您取消了删除操作！", "error");
+                            }
+                        });
+            });
+
+        });
+
+        $('#submit_add').click(function(){
+            var data = $('#add_form_c').serialize();
+        })
+
+    </script>
+</body>
+
+</html>
