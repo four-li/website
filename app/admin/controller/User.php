@@ -18,7 +18,7 @@ class User extends BaseController
                     'status|account' => ['like', '%'.$sreach.'%'],
                 ];
         }
-
+        
         $list = $admin->where($where)->paginate(4,false,[
             'query' => request()->param(),
         ])->each(function($item, $key){
