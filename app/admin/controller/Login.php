@@ -41,6 +41,7 @@ class Login extends CommonController
         return $this->fetch();
     }
 
+    // 退出
     public function logout(){
         $admin = new Admin();
         $info = $admin->find(Session::get('user_info')['id']);

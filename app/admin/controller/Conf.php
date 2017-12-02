@@ -80,6 +80,7 @@ class Conf extends BaseController
         return $this->fetch();
     }
 
+    //
     public function group(){
         return $this->fetch();
     }

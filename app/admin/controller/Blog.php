@@ -27,7 +27,7 @@ class Blog extends BaseController
         $this->assign('list', $list);
         return $this->fetch();
     }
-
+    
     public function add(Request $request){
 
         return $this->fetch();
@@ -41,27 +41,7 @@ class Blog extends BaseController
         return json(['width'=> '1000']);
     }
 
-    public function del_user(Request $request){
-        $user_id = $request->get('id');
-        // 软删除
-        $res = \app\admin\model\Admin::destroy($user_id);
+    public function detail(){
 
-        return success($res);
     }
-
-    public function test(){
-        return 'test';
-    }
-
-    public function demo(){
-        return 'demo';
-    }
-
-    public function api(){
-        $list = db('test')->where('id>100')->order('create_time desc')->select();
-
-        $this->assign('list',$list);
-        return $this->fetch();
-    }
-
 }
