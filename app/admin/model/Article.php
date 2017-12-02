@@ -4,7 +4,7 @@ namespace app\admin\model;
 use think\Request;
 use traits\model\SoftDelete;
 class Article extends \think\Model{
-
+    // 是时候来一波垂直拆表操作了   主表存一些截断描述 titil 。  从表存Text
     protected $autoWriteTimestamp = 'datetime';
     protected $createTime = 'create_time';
     protected $updateTime = 'update_time';
@@ -16,11 +16,13 @@ class Article extends \think\Model{
 //        return $status[$value];
 //    }
 
-    public function getOfflineAttr($value)
-    {
-        $status = [0=>'<span class="badge">离线</span>',1=>'<span class="badge badge-info">在线</span>'];
-        return $status[$value];
-    }
+
+
+//    public function getOfflineAttr($value)
+//    {
+//        $status = [0=>'<span class="badge">离线</span>',1=>'<span class="badge badge-info">在线</span>'];
+//        return $status[$value];
+//    }
 
     // 软删除
     use SoftDelete;

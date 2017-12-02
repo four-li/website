@@ -35,7 +35,7 @@ class Blog extends BaseController
 
     public function up(Request $request){
 
-        $request->ip();
+        echo $request->ip();
         return  stripslashes(htmlspecialchars_decode($request->post('data')));
 
         return json(['width'=> '1000']);
