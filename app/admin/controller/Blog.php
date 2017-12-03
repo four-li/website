@@ -27,7 +27,7 @@ class Blog extends BaseController
         $this->assign('list', $list);
         return $this->fetch();
     }
-    
+
     public function add(Request $request){
 
         return $this->fetch();
