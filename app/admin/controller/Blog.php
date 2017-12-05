@@ -33,14 +33,6 @@ class Blog extends BaseController
         return $this->fetch();
     }
 
-    public function up(Request $request){
-
-        echo $request->ip();
-        return  stripslashes(htmlspecialchars_decode($request->post('data')));
-
-        return json(['width'=> '1000']);
-    }
-
     public function detail(){
 
     }

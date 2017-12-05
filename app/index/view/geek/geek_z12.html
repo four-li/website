@@ -1,0 +1,2194 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/x-icon" href="https://production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico">
+    <link rel="mask-icon" type="" href="https://production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111">
+    <meta name="robots" content="noindex">
+    <title>女儿我爱你</title>
+
+
+
+
+    <style>
+        body {
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -webkit-box-align: center;
+            -ms-flex-align: center;
+            align-items: center;
+            -webkit-box-pack: center;
+            -ms-flex-pack: center;
+            justify-content: center;
+            height: 100vh;
+            overflow: hidden;
+            background: #222;
+        }
+
+        .view {
+            height: 600px;
+            width: 600px;
+            visibility: hidden;
+            -webkit-perspective: 700px;
+            perspective: 700px;
+            -webkit-perspective-origin: 50% 0;
+            perspective-origin: 50% 0;
+        }
+        .view * {
+            -webkit-transform-style: preserve-3d;
+            transform-style: preserve-3d;
+        }
+
+        .cube {
+            position: relative;
+            height: 50%;
+            width: 14.28571%;
+            -webkit-animation: enter 1s 1s forwards;
+            animation: enter 1s 1s forwards;
+        }
+        .cube .inner {
+            position: absolute;
+            top: 2px;
+            right: 2px;
+            bottom: 2px;
+            left: 2px;
+        }
+        .cube .side {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            visibility: visible;
+        }
+        .cube .side:nth-child(1) {
+            -webkit-transform: rotateX(-90deg) translateZ(13px);
+            transform: rotateX(-90deg) translateZ(13px);
+            background: #eb5d80;
+        }
+        .cube .side:nth-child(2) {
+            -webkit-transform: rotateX(90deg) translateZ(13px);
+            transform: rotateX(90deg) translateZ(13px);
+            background: #eb5d80;
+        }
+        .cube .side:nth-child(3) {
+            -webkit-transform: rotateY(90deg) translateZ(13px);
+            transform: rotateY(90deg) translateZ(13px);
+            background: #e62e5b;
+        }
+        .cube .side:nth-child(4) {
+            -webkit-transform: rotateY(-90deg) translateZ(13px);
+            transform: rotateY(-90deg) translateZ(13px);
+            background: #e62e5b;
+        }
+        .cube .side:nth-child(5) {
+            -webkit-transform: rotateY(-180deg) translateZ(13px);
+            transform: rotateY(-180deg) translateZ(13px);
+            background: #cc1542;
+        }
+        .cube .side:nth-child(6) {
+            -webkit-transform: rotateY(0) translateZ(13px);
+            transform: rotateY(0) translateZ(13px);
+            background: #cc1542;
+        }
+
+        .layer {
+            position: absolute;
+            top: 50%;
+            left: 50%;
+            -webkit-transform: translate(-50%, -50%);
+            transform: translate(-50%, -50%);
+            height: 60px;
+            width: 210px;
+        }
+        .layer .axis {
+            position: absolute;
+            top: 0;
+            right: 0;
+            bottom: 0;
+            left: 0;
+            display: -webkit-box;
+            display: -ms-flexbox;
+            display: flex;
+            -ms-flex-flow: row wrap;
+            flex-flow: row wrap;
+            -webkit-animation: rotate 3s cubic-bezier(0.81, -0.59, 0.54, 1.8) infinite;
+            animation: rotate 3s cubic-bezier(0.81, -0.59, 0.54, 1.8) infinite;
+        }
+        .layer:nth-child(1) {
+            -webkit-transform: translate(-50%, -50%) translateY(-150%) rotateX(90deg);
+            transform: translate(-50%, -50%) translateY(-150%) rotateX(90deg);
+            z-index: 6;
+        }
+        .layer:nth-child(1) .axis {
+            -webkit-animation-delay: 2s;
+            animation-delay: 2s;
+        }
+        .layer:nth-child(1) .cube:nth-child(1) {
+            -webkit-transform: translate3d(360px, 30px, 300px);
+            transform: translate3d(360px, 30px, 300px);
+        }
+        @-webkit-keyframes enter-1 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-1 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(1) .cube:nth-child(2) {
+            -webkit-transform: translate3d(-300px, -60px, 240px);
+            transform: translate3d(-300px, -60px, 240px);
+        }
+        @-webkit-keyframes enter-2 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-2 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(1) .cube:nth-child(3) {
+            -webkit-transform: translate3d(-120px, -210px, -360px);
+            transform: translate3d(-120px, -210px, -360px);
+        }
+        @-webkit-keyframes enter-3 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-3 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(1) .cube:nth-child(4) {
+            -webkit-transform: translate3d(270px, -180px, 210px);
+            transform: translate3d(270px, -180px, 210px);
+        }
+        @-webkit-keyframes enter-4 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-4 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(1) .cube:nth-child(5) {
+            -webkit-transform: translate3d(300px, -330px, -150px);
+            transform: translate3d(300px, -330px, -150px);
+        }
+        @-webkit-keyframes enter-5 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-5 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(1) .cube:nth-child(6) {
+            -webkit-transform: translate3d(-330px, -90px, 120px);
+            transform: translate3d(-330px, -90px, 120px);
+        }
+        @-webkit-keyframes enter-6 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-6 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(1) .cube:nth-child(7) {
+            -webkit-transform: translate3d(120px, -60px, 180px);
+            transform: translate3d(120px, -60px, 180px);
+        }
+        @-webkit-keyframes enter-7 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-7 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(1) .cube:nth-child(8) {
+            -webkit-transform: translate3d(270px, 90px, 240px);
+            transform: translate3d(270px, 90px, 240px);
+        }
+        @-webkit-keyframes enter-8 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-8 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(1) .cube:nth-child(9) {
+            -webkit-transform: translate3d(420px, -30px, 30px);
+            transform: translate3d(420px, -30px, 30px);
+        }
+        @-webkit-keyframes enter-9 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-9 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(1) .cube:nth-child(10) {
+            -webkit-transform: translate3d(150px, -90px, -180px);
+            transform: translate3d(150px, -90px, -180px);
+        }
+        @-webkit-keyframes enter-10 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-10 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(1) .cube:nth-child(11) {
+            -webkit-transform: translate3d(210px, 390px, 90px);
+            transform: translate3d(210px, 390px, 90px);
+        }
+        @-webkit-keyframes enter-11 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-11 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(1) .cube:nth-child(12) {
+            -webkit-transform: translate3d(210px, 210px, 60px);
+            transform: translate3d(210px, 210px, 60px);
+        }
+        @-webkit-keyframes enter-12 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-12 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(1) .cube:nth-child(13) {
+            -webkit-transform: translate3d(-360px, -180px, 120px);
+            transform: translate3d(-360px, -180px, 120px);
+        }
+        @-webkit-keyframes enter-13 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-13 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(1) .cube:nth-child(14) {
+            -webkit-transform: translate3d(300px, 360px, -330px);
+            transform: translate3d(300px, 360px, -330px);
+        }
+        @-webkit-keyframes enter-14 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-14 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) {
+            -webkit-transform: translate(-50%, -50%) translateY(-100%) rotateX(90deg);
+            transform: translate(-50%, -50%) translateY(-100%) rotateX(90deg);
+            z-index: 5;
+        }
+        .layer:nth-child(2) .axis {
+            -webkit-animation-delay: 2.25s;
+            animation-delay: 2.25s;
+        }
+        .layer:nth-child(2) .cube:nth-child(1) {
+            -webkit-transform: translate3d(-360px, -300px, -60px);
+            transform: translate3d(-360px, -300px, -60px);
+        }
+        @-webkit-keyframes enter-15 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-15 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) .cube:nth-child(2) {
+            -webkit-transform: translate3d(-360px, 330px, 180px);
+            transform: translate3d(-360px, 330px, 180px);
+        }
+        @-webkit-keyframes enter-16 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-16 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) .cube:nth-child(3) {
+            -webkit-transform: translate3d(-210px, -120px, -90px);
+            transform: translate3d(-210px, -120px, -90px);
+        }
+        @-webkit-keyframes enter-17 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-17 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) .cube:nth-child(4) {
+            -webkit-transform: translate3d(-60px, 150px, -420px);
+            transform: translate3d(-60px, 150px, -420px);
+        }
+        @-webkit-keyframes enter-18 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-18 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) .cube:nth-child(5) {
+            -webkit-transform: translate3d(-180px, 180px, -270px);
+            transform: translate3d(-180px, 180px, -270px);
+        }
+        @-webkit-keyframes enter-19 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-19 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) .cube:nth-child(6) {
+            -webkit-transform: translate3d(180px, -60px, -120px);
+            transform: translate3d(180px, -60px, -120px);
+        }
+        @-webkit-keyframes enter-20 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-20 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) .cube:nth-child(7) {
+            -webkit-transform: translate3d(-330px, 360px, -270px);
+            transform: translate3d(-330px, 360px, -270px);
+        }
+        @-webkit-keyframes enter-21 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-21 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) .cube:nth-child(8) {
+            -webkit-transform: translate3d(150px, 210px, 90px);
+            transform: translate3d(150px, 210px, 90px);
+        }
+        @-webkit-keyframes enter-22 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-22 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) .cube:nth-child(9) {
+            -webkit-transform: translate3d(-360px, -60px, 30px);
+            transform: translate3d(-360px, -60px, 30px);
+        }
+        @-webkit-keyframes enter-23 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-23 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) .cube:nth-child(10) {
+            -webkit-transform: translate3d(390px, 420px, 300px);
+            transform: translate3d(390px, 420px, 300px);
+        }
+        @-webkit-keyframes enter-24 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-24 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) .cube:nth-child(11) {
+            -webkit-transform: translate3d(-420px, 390px, -90px);
+            transform: translate3d(-420px, 390px, -90px);
+        }
+        @-webkit-keyframes enter-25 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-25 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) .cube:nth-child(12) {
+            -webkit-transform: translate3d(-210px, -330px, 180px);
+            transform: translate3d(-210px, -330px, 180px);
+        }
+        @-webkit-keyframes enter-26 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-26 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) .cube:nth-child(13) {
+            -webkit-transform: translate3d(390px, -330px, 240px);
+            transform: translate3d(390px, -330px, 240px);
+        }
+        @-webkit-keyframes enter-27 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-27 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(2) .cube:nth-child(14) {
+            -webkit-transform: translate3d(210px, -360px, -120px);
+            transform: translate3d(210px, -360px, -120px);
+        }
+        @-webkit-keyframes enter-28 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-28 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) {
+            -webkit-transform: translate(-50%, -50%) translateY(-50%) rotateX(90deg);
+            transform: translate(-50%, -50%) translateY(-50%) rotateX(90deg);
+            z-index: 4;
+        }
+        .layer:nth-child(3) .axis {
+            -webkit-animation-delay: 2.5s;
+            animation-delay: 2.5s;
+        }
+        .layer:nth-child(3) .cube:nth-child(1) {
+            -webkit-transform: translate3d(-90px, 90px, 360px);
+            transform: translate3d(-90px, 90px, 360px);
+        }
+        @-webkit-keyframes enter-29 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-29 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) .cube:nth-child(2) {
+            -webkit-transform: translate3d(180px, 420px, -240px);
+            transform: translate3d(180px, 420px, -240px);
+        }
+        @-webkit-keyframes enter-30 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-30 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) .cube:nth-child(3) {
+            -webkit-transform: translate3d(150px, 300px, 210px);
+            transform: translate3d(150px, 300px, 210px);
+        }
+        @-webkit-keyframes enter-31 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-31 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) .cube:nth-child(4) {
+            -webkit-transform: translate3d(-270px, -60px, -300px);
+            transform: translate3d(-270px, -60px, -300px);
+        }
+        @-webkit-keyframes enter-32 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-32 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) .cube:nth-child(5) {
+            -webkit-transform: translate3d(150px, -180px, 270px);
+            transform: translate3d(150px, -180px, 270px);
+        }
+        @-webkit-keyframes enter-33 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-33 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) .cube:nth-child(6) {
+            -webkit-transform: translate3d(-180px, 180px, 420px);
+            transform: translate3d(-180px, 180px, 420px);
+        }
+        @-webkit-keyframes enter-34 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-34 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) .cube:nth-child(7) {
+            -webkit-transform: translate3d(-270px, 30px, 420px);
+            transform: translate3d(-270px, 30px, 420px);
+        }
+        @-webkit-keyframes enter-35 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-35 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) .cube:nth-child(8) {
+            -webkit-transform: translate3d(300px, 180px, -270px);
+            transform: translate3d(300px, 180px, -270px);
+        }
+        @-webkit-keyframes enter-36 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-36 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) .cube:nth-child(9) {
+            -webkit-transform: translate3d(180px, -150px, -420px);
+            transform: translate3d(180px, -150px, -420px);
+        }
+        @-webkit-keyframes enter-37 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-37 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) .cube:nth-child(10) {
+            -webkit-transform: translate3d(180px, -180px, -120px);
+            transform: translate3d(180px, -180px, -120px);
+        }
+        @-webkit-keyframes enter-38 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-38 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) .cube:nth-child(11) {
+            -webkit-transform: translate3d(330px, 60px, 60px);
+            transform: translate3d(330px, 60px, 60px);
+        }
+        @-webkit-keyframes enter-39 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-39 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) .cube:nth-child(12) {
+            -webkit-transform: translate3d(180px, 420px, -150px);
+            transform: translate3d(180px, 420px, -150px);
+        }
+        @-webkit-keyframes enter-40 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-40 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) .cube:nth-child(13) {
+            -webkit-transform: translate3d(-420px, 240px, -90px);
+            transform: translate3d(-420px, 240px, -90px);
+        }
+        @-webkit-keyframes enter-41 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-41 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(3) .cube:nth-child(14) {
+            -webkit-transform: translate3d(150px, -300px, -150px);
+            transform: translate3d(150px, -300px, -150px);
+        }
+        @-webkit-keyframes enter-42 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-42 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) {
+            -webkit-transform: translate(-50%, -50%) translateY(0%) rotateX(90deg);
+            transform: translate(-50%, -50%) translateY(0%) rotateX(90deg);
+            z-index: 3;
+        }
+        .layer:nth-child(4) .axis {
+            -webkit-animation-delay: 2.75s;
+            animation-delay: 2.75s;
+        }
+        .layer:nth-child(4) .cube:nth-child(1) {
+            -webkit-transform: translate3d(-210px, -270px, 270px);
+            transform: translate3d(-210px, -270px, 270px);
+        }
+        @-webkit-keyframes enter-43 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-43 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) .cube:nth-child(2) {
+            -webkit-transform: translate3d(240px, -210px, -120px);
+            transform: translate3d(240px, -210px, -120px);
+        }
+        @-webkit-keyframes enter-44 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-44 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) .cube:nth-child(3) {
+            -webkit-transform: translate3d(330px, -90px, 210px);
+            transform: translate3d(330px, -90px, 210px);
+        }
+        @-webkit-keyframes enter-45 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-45 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) .cube:nth-child(4) {
+            -webkit-transform: translate3d(-30px, 390px, -210px);
+            transform: translate3d(-30px, 390px, -210px);
+        }
+        @-webkit-keyframes enter-46 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-46 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) .cube:nth-child(5) {
+            -webkit-transform: translate3d(-150px, 240px, -120px);
+            transform: translate3d(-150px, 240px, -120px);
+        }
+        @-webkit-keyframes enter-47 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-47 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) .cube:nth-child(6) {
+            -webkit-transform: translate3d(60px, -30px, 30px);
+            transform: translate3d(60px, -30px, 30px);
+        }
+        @-webkit-keyframes enter-48 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-48 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) .cube:nth-child(7) {
+            -webkit-transform: translate3d(-420px, -300px, -360px);
+            transform: translate3d(-420px, -300px, -360px);
+        }
+        @-webkit-keyframes enter-49 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-49 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) .cube:nth-child(8) {
+            -webkit-transform: translate3d(-420px, 30px, -120px);
+            transform: translate3d(-420px, 30px, -120px);
+        }
+        @-webkit-keyframes enter-50 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-50 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) .cube:nth-child(9) {
+            -webkit-transform: translate3d(120px, -240px, 300px);
+            transform: translate3d(120px, -240px, 300px);
+        }
+        @-webkit-keyframes enter-51 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-51 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) .cube:nth-child(10) {
+            -webkit-transform: translate3d(-270px, -300px, 150px);
+            transform: translate3d(-270px, -300px, 150px);
+        }
+        @-webkit-keyframes enter-52 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-52 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) .cube:nth-child(11) {
+            -webkit-transform: translate3d(-300px, 360px, 330px);
+            transform: translate3d(-300px, 360px, 330px);
+        }
+        @-webkit-keyframes enter-53 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-53 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) .cube:nth-child(12) {
+            -webkit-transform: translate3d(210px, 420px, 210px);
+            transform: translate3d(210px, 420px, 210px);
+        }
+        @-webkit-keyframes enter-54 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-54 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) .cube:nth-child(13) {
+            -webkit-transform: translate3d(-150px, -120px, 30px);
+            transform: translate3d(-150px, -120px, 30px);
+        }
+        @-webkit-keyframes enter-55 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-55 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(4) .cube:nth-child(14) {
+            -webkit-transform: translate3d(-180px, 300px, 420px);
+            transform: translate3d(-180px, 300px, 420px);
+        }
+        @-webkit-keyframes enter-56 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-56 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) {
+            -webkit-transform: translate(-50%, -50%) translateY(50%) rotateX(90deg);
+            transform: translate(-50%, -50%) translateY(50%) rotateX(90deg);
+            z-index: 2;
+        }
+        .layer:nth-child(5) .axis {
+            -webkit-animation-delay: 3s;
+            animation-delay: 3s;
+        }
+        .layer:nth-child(5) .cube:nth-child(1) {
+            -webkit-transform: translate3d(210px, -360px, 30px);
+            transform: translate3d(210px, -360px, 30px);
+        }
+        @-webkit-keyframes enter-57 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-57 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) .cube:nth-child(2) {
+            -webkit-transform: translate3d(-270px, -210px, 30px);
+            transform: translate3d(-270px, -210px, 30px);
+        }
+        @-webkit-keyframes enter-58 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-58 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) .cube:nth-child(3) {
+            -webkit-transform: translate3d(-120px, -270px, -420px);
+            transform: translate3d(-120px, -270px, -420px);
+        }
+        @-webkit-keyframes enter-59 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-59 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) .cube:nth-child(4) {
+            -webkit-transform: translate3d(180px, -60px, 390px);
+            transform: translate3d(180px, -60px, 390px);
+        }
+        @-webkit-keyframes enter-60 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-60 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) .cube:nth-child(5) {
+            -webkit-transform: translate3d(270px, -270px, 210px);
+            transform: translate3d(270px, -270px, 210px);
+        }
+        @-webkit-keyframes enter-61 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-61 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) .cube:nth-child(6) {
+            -webkit-transform: translate3d(90px, -330px, 390px);
+            transform: translate3d(90px, -330px, 390px);
+        }
+        @-webkit-keyframes enter-62 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-62 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) .cube:nth-child(7) {
+            -webkit-transform: translate3d(330px, 30px, 420px);
+            transform: translate3d(330px, 30px, 420px);
+        }
+        @-webkit-keyframes enter-63 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-63 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) .cube:nth-child(8) {
+            -webkit-transform: translate3d(-240px, -210px, -150px);
+            transform: translate3d(-240px, -210px, -150px);
+        }
+        @-webkit-keyframes enter-64 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-64 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) .cube:nth-child(9) {
+            -webkit-transform: translate3d(-330px, 360px, 90px);
+            transform: translate3d(-330px, 360px, 90px);
+        }
+        @-webkit-keyframes enter-65 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-65 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) .cube:nth-child(10) {
+            -webkit-transform: translate3d(60px, 180px, -150px);
+            transform: translate3d(60px, 180px, -150px);
+        }
+        @-webkit-keyframes enter-66 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-66 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) .cube:nth-child(11) {
+            -webkit-transform: translate3d(420px, -30px, 270px);
+            transform: translate3d(420px, -30px, 270px);
+        }
+        @-webkit-keyframes enter-67 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-67 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) .cube:nth-child(12) {
+            -webkit-transform: translate3d(180px, 180px, -150px);
+            transform: translate3d(180px, 180px, -150px);
+        }
+        @-webkit-keyframes enter-68 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-68 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) .cube:nth-child(13) {
+            -webkit-transform: translate3d(-210px, 330px, -420px);
+            transform: translate3d(-210px, 330px, -420px);
+        }
+        @-webkit-keyframes enter-69 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-69 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(5) .cube:nth-child(14) {
+            -webkit-transform: translate3d(-240px, 150px, 300px);
+            transform: translate3d(-240px, 150px, 300px);
+        }
+        @-webkit-keyframes enter-70 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-70 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) {
+            -webkit-transform: translate(-50%, -50%) translateY(100%) rotateX(90deg);
+            transform: translate(-50%, -50%) translateY(100%) rotateX(90deg);
+            z-index: 1;
+        }
+        .layer:nth-child(6) .axis {
+            -webkit-animation-delay: 3.25s;
+            animation-delay: 3.25s;
+        }
+        .layer:nth-child(6) .cube:nth-child(1) {
+            -webkit-transform: translate3d(-330px, 270px, 420px);
+            transform: translate3d(-330px, 270px, 420px);
+        }
+        @-webkit-keyframes enter-71 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-71 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) .cube:nth-child(2) {
+            -webkit-transform: translate3d(180px, 30px, -30px);
+            transform: translate3d(180px, 30px, -30px);
+        }
+        @-webkit-keyframes enter-72 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-72 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) .cube:nth-child(3) {
+            -webkit-transform: translate3d(-240px, -270px, 300px);
+            transform: translate3d(-240px, -270px, 300px);
+        }
+        @-webkit-keyframes enter-73 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-73 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) .cube:nth-child(4) {
+            -webkit-transform: translate3d(90px, -60px, -270px);
+            transform: translate3d(90px, -60px, -270px);
+        }
+        @-webkit-keyframes enter-74 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-74 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) .cube:nth-child(5) {
+            -webkit-transform: translate3d(30px, -180px, -390px);
+            transform: translate3d(30px, -180px, -390px);
+        }
+        @-webkit-keyframes enter-75 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-75 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) .cube:nth-child(6) {
+            -webkit-transform: translate3d(210px, -60px, -240px);
+            transform: translate3d(210px, -60px, -240px);
+        }
+        @-webkit-keyframes enter-76 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-76 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) .cube:nth-child(7) {
+            -webkit-transform: translate3d(180px, 360px, -30px);
+            transform: translate3d(180px, 360px, -30px);
+        }
+        @-webkit-keyframes enter-77 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-77 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) .cube:nth-child(8) {
+            -webkit-transform: translate3d(270px, 240px, 270px);
+            transform: translate3d(270px, 240px, 270px);
+        }
+        @-webkit-keyframes enter-78 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-78 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) .cube:nth-child(9) {
+            -webkit-transform: translate3d(240px, -30px, -360px);
+            transform: translate3d(240px, -30px, -360px);
+        }
+        @-webkit-keyframes enter-79 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-79 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) .cube:nth-child(10) {
+            -webkit-transform: translate3d(90px, -30px, 60px);
+            transform: translate3d(90px, -30px, 60px);
+        }
+        @-webkit-keyframes enter-80 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-80 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) .cube:nth-child(11) {
+            -webkit-transform: translate3d(150px, 90px, 180px);
+            transform: translate3d(150px, 90px, 180px);
+        }
+        @-webkit-keyframes enter-81 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-81 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) .cube:nth-child(12) {
+            -webkit-transform: translate3d(-360px, -60px, 90px);
+            transform: translate3d(-360px, -60px, 90px);
+        }
+        @-webkit-keyframes enter-82 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-82 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) .cube:nth-child(13) {
+            -webkit-transform: translate3d(-60px, 180px, 390px);
+            transform: translate3d(-60px, 180px, 390px);
+        }
+        @-webkit-keyframes enter-83 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-83 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        .layer:nth-child(6) .cube:nth-child(14) {
+            -webkit-transform: translate3d(-270px, -270px, 210px);
+            transform: translate3d(-270px, -270px, 210px);
+        }
+        @-webkit-keyframes enter-84 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter-84 {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @-webkit-keyframes enter {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @keyframes enter {
+            to {
+                -webkit-transform: translate3d(0, 0, 0);
+                transform: translate3d(0, 0, 0);
+            }
+        }
+        @-webkit-keyframes rotate {
+            0% {
+                -webkit-transform: rotate(0);
+                transform: rotate(0);
+            }
+            50%,100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+        @keyframes rotate {
+            0% {
+                -webkit-transform: rotate(0);
+                transform: rotate(0);
+            }
+            50%,100% {
+                -webkit-transform: rotate(360deg);
+                transform: rotate(360deg);
+            }
+        }
+
+    </style>
+
+
+
+
+
+</head>
+
+<body translate="no">
+
+
+<div class="view">
+    <div class="layer">
+        <div class="axis">
+            <div class="cube">
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+            </div>
+        </div>
+    </div>
+    <div class="layer">
+        <div class="axis">
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layer">
+        <div class="axis">
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+        </div>
+    </div>
+    <div class="layer">
+        <div class="axis">
+            <div class="cube">
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+            </div>
+        </div>
+    </div>
+    <div class="layer">
+        <div class="axis">
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+        </div>
+    </div>
+    <div class="layer">
+        <div class="axis">
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+                <div class="inner">
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                    <div class="side"></div>
+                </div>
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+            <div class="cube">
+            </div>
+        </div>
+    </div>
+</div>
+
+
+
+
+
+
+
+
+</body></html>

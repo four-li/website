@@ -14,6 +14,8 @@
         {
             // 根据当前控制器名来判断要执行那个城市的操作
             $cityName = $request->controller();
+
+            return redirect('index/err');
             return $this->city($cityName);
         }
 

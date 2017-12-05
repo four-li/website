@@ -85,8 +85,14 @@
         $('.click2edit').destroy();
 
         var cdata = $('.click2edit').html();
-        $.post("{:url('up')}", {data:cdata},function(e){
+//        alert(cdata);
+        $.post("{:url('up')}", {content:cdata},function(e){
+            // 显示请稍后
+            if(e.code == 0){
 
+            }else{
+
+            }
         })
     };
 </script>

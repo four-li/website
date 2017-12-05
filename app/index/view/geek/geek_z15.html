@@ -1,0 +1,139 @@
+<!DOCTYPE html>
+<html><head>
+    <meta charset="UTF-8">
+    <link rel="shortcut icon" type="image/x-icon" href="https://production-assets.codepen.io/assets/favicon/favicon-8ea04875e70c4b0bb41da869e81236e54394d63638a1ef12fa558a4a835f1164.ico">
+    <link rel="mask-icon" type="" href="https://production-assets.codepen.io/assets/favicon/logo-pin-f2d2b6d2c61838f7e76325261b7195c27224080bc099486ddd6dccb469b8e8e6.svg" color="#111">
+    <meta name="robots" content="noindex">
+    <title>浪 &amp; Canvas Liquid Effect</title>
+
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/meyer-reset/2.0/reset.min.css">
+
+    <style>
+        body{
+            background: #000;
+        }
+
+        #canvas{
+            position: absolute;
+            -webkit-filter: url("#liquid");
+            filter: url("#liquid");
+        }
+
+    </style>
+
+
+
+
+
+</head>
+
+<body translate="no">
+
+<canvas id="canvas" width="779" height="367"></canvas>
+<svg xmlns="http://www.w3.org/2000/svg" version="1.1">
+    <defs>
+        <filter id="liquid">
+            <!--important code : [blur + contrast] , contrast on alpha channel to prevent change color-->
+            <feGaussianBlur in="SourceGraphic" stdDeviation="10" result="blur"></feGaussianBlur>
+            <feColorMatrix in="blur" mode="matrix" values="1 0 0 0 0  0 1 0 0 0  0 0 1 0 0  0 0 0 40 -10"></feColorMatrix>
+        </filter>
+    </defs>
+</svg>
+
+
+<script>
+    //all js code just draw circles ,svg filter is important code
+
+    const canvas = document.getElementById("canvas"),
+            context = canvas.getContext("2d"),
+            colorPallete =
+                    ["#00f", "#00a", "#00b", "#00c", "#00d", "#00e"];
+    // ["#f00","#a00","#b00","#c00","#d00","#e00"];
+    // ["white","#888","yellow","orange","darkorange","darkmagenta","darkgreen","khaki"];
+
+    var width = canvas.width = window.innerWidth,
+            height = canvas.height = window.innerHeight,
+            src = {
+                x: width / 2,
+                y: height / 2
+            },
+            circles = [];
+
+    window.onresize = function() {
+        width = canvas.width = window.innerWidth;
+        height = canvas.height = window.innerHeight;
+        src.x= width / 2;
+        src.y= height / 2;
+    }
+
+    class Circle {
+        constructor() {
+            this.x = src.x;
+            this.y = src.y;
+            this.angle = Math.PI * 2 * Math.random();
+            var speed=1 + Math.random();
+            this.vx = speed* Math.cos(this.angle);
+            this.vy = speed* Math.sin(this.angle);
+
+            // this.xr = 6 + 10 * Math.random();
+            // this.yr = 2 + 10 * Math.random();
+            this.r = 6 + 10 * Math.random()
+
+            this.color = colorPallete[Math.floor(Math.random() * colorPallete.length)];
+        }
+
+        update() {
+            this.x += this.vx;
+            this.y += this.vy;
+
+            // this.xr-= .01;
+            // this.yr -= .01;
+            // this.r=Math.min(this.yr,this.xr);
+            this.r -= .01;
+
+        }
+    }
+
+    function removeCircles() {
+        for (var i = 0; i < circles.length; i++) {
+            var b = circles[i];
+            if ( b.x + b.r < 0 || b.x - b.r > width || b.y + b.r < 0 ||  b.y - b.r > height || b.r < 0  ) {
+                circles.splice(i, 1);
+            }
+        }
+    }
+
+    function renderCircles() {
+        context.clearRect(0, 0, width, height);
+
+        if (Math.random() > .2)
+            circles.push(new Circle());
+
+        for (var i = 0; i < circles.length; i++) {
+            var b = circles[i];
+            context.fillStyle = b.color;
+            context.beginPath();
+
+            context.arc(b.x, b.y, b.r, 0, Math.PI * 2, false);
+            // context.ellipse(b.x, b.y, b.xr, b.yr, b.angle, 0, 2 * Math.PI);
+
+            context.fill();
+            b.update();
+        }
+
+        removeCircles();
+        requestAnimationFrame(renderCircles);
+    }
+
+    renderCircles();
+
+    // http://codepen.io/mnmxmx/pen/VjjvEq
+</script>
+
+
+
+
+
+
+
+</body></html>
