@@ -30,6 +30,7 @@ class User extends BaseController
     }
 
     public function add(Request $request){
+        p(123);
         $post = $request->post();
         if($post['password_1'] != $post['password_2']) return $this->error('两次密码不一致');
 

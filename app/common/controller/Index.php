@@ -61,4 +61,10 @@
 
             return $_res;
         }
+
+        public function api_error($msg){
+            db('api_log')->insert([
+                'msg' => $msg
+            ]);
+        }
     }
