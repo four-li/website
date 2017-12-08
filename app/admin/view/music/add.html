@@ -1,0 +1,24 @@
+<!DOCTYPE html>
+<html>
+<head>
+    <meta charset="utf-8">
+    <meta name="viewport" content="width=device-width, initial-scale=1, maximum-scale=1">
+    <title>开始使用layui</title>
+    <link rel="stylesheet" href="laycss/layui.css">
+</head>
+<body>
+
+<script src="layjs/layui.js"></script>
+<script>
+
+    layui.use('code', function(){ //加载code模块
+        layui.code({
+            title: 'NotePad++的风格',
+            about: false,
+            skin: 'notepad' //如果要默认风格，不用设定该key。
+        });
+    });
+
+</script>
+</body>
+</html>
