@@ -1,35 +1,422 @@
 <!DOCTYPE html>
-<html lang="en">
+<html>
 <head>
-    <meta charset="UTF-8">
-    <title>❤️❤️❤️</title>
-    <style type="text/css">
-        body{
-            overflow: hidden;
-            margin: 0;
-        }
-        h1{
-            position: fixed;
-            top: 50%;
-            left: 0;
-            width: 100%;
-            text-align: center;
-            transform:translateY(-50%);
-            font-family: 'Love Ya Like A Sister', cursive;
-            font-size: 40px;
-            color: #c70012;
-            padding: 0 20px;
-        }
-        @media (min-width:1200px){
-            h1{
-                font-size: 60px;
-            }
-        }
-    </style>
+    <meta charset="utf-8">
+    <title>摇起来</title>
+    <link rel="stylesheet" href="rythm/demo/rythm.css" media="screen" title="no title" charset="utf-8">
 </head>
 <body>
-<canvas></canvas>
-<h1>陈传烽爸爸</h1>
-<script src="js/geek_z/yh/app.js"></script>
+<!-- <audio id="audio" src="samples/rythmC" autoplay=""></audio> -->
+<div class="container">
+    <h1 class="shake3">
+        老陈老周的纪念
+    </h1>
+
+    <h2>
+        我的傻云☁️.
+    </h2>
+
+    <div id='player'>
+        <button id='start'>Start</button>
+        <button id='stop'>Stop</button>
+        <button id='mic'>Use Microphone</button>
+    </div>
+    <div>
+        <a class="twist3" href="https://github.com/indyfw">View on github</a>
+        <a class="twist1" href="https://github.com/indyfw/Rythm.js/releases">Release notes</a>
+    </div>
+    <section>
+        <input type="hidden" id="music" name="music" value="rythm/samples/rythmB.mp3">
+
+        <h3>
+            Basic usage
+        </h3>
+
+        <div class="demo">
+            <div class="rythm rythm-bass">♫</div>
+          <pre class="prettyprint">
+            use css class 'rythm-bass'
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm rythm-medium">♫</div>
+          <pre class="prettyprint">
+            use css class 'rythm-medium'
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm rythm-high">♫</div>
+          <pre class="prettyprint">
+            use css class 'rythm-high'
+          </pre>
+        </div>
+    </section>
+    <h1>
+        Added in v2.2.2
+    </h1>
+    <section>
+        <h3>
+            Neon
+        </h3>
+
+        <div class="demo">
+            <div class="rythm dead"></div>
+        </div>
+
+
+        <div class="demo">
+            <div class="rythm neon1"></div>
+          <pre class="prettyprint">
+            rythm.addRythm('neon1', 'neon', 0, 10)
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm neon2"></div>
+          <pre class="prettyprint">
+            rythm.addRythm('neon2', 'neon', 0, 10, {
+              from: [0,0,255],
+              to:[255,0,255]
+            })
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm neon3"></div>
+          <pre class="prettyprint">
+            rythm.addRythm('neon3', 'neon', 0, 10, {
+              from: [255,255,0],
+              to:[255,0,0]
+            })</pre>
+        </div>
+    </section>
+    <section>
+        <h3>
+            Border-Color
+        </h3>
+
+        <div class="demo">
+            <div class="rythm borderColor1"></div>
+          <pre class="prettyprint">
+            rythm.addRythm('borderColor1', 'borderColor', 0, 10)
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm borderColor2"></div>
+          <pre class="prettyprint">
+            rythm.addRythm('borderColor2', 'borderColor', 0, 10, {
+              from: [0,0,255],
+              to:[255,0,255]
+            })
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm borderColor3"></div>
+          <pre class="prettyprint">
+            rythm.addRythm('borderColor3', 'color', 0, 10, {
+              from: [255,255,0],
+              to:[255,0,0]
+            })
+          </pre>
+        </div>
+    </section>
+    <section>
+        <h3>
+            Kern
+        </h3>
+
+        <div class="demo">
+            <div class="rythm rythm-kern kern1">𐇑🕪 rythm.js</div>
+          <pre class="prettyprint">
+            rythm.addRythm('kern1', 'kern', 0, 10 , {
+              min: -5,
+              max: 5
+            })
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm rythm-kern kern2">𐇑🕪 rythm.js</div>
+          <pre class="prettyprint">
+            rythm.addRythm('kern2', 'kern', 0, 10 , {
+              min: -5,
+              max: 5,
+              reverse: true,
+            })
+          </pre>
+        </div>
+    </section>
+    <h1>
+        Added in v2.2.1
+    </h1>
+    <section>
+        <h3>
+            Blur
+        </h3>
+
+        <div class="demo">
+            <div class="rythm blur1">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('blur1', 'blur', 0, 10)
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm blur2">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('blur2', 'blur', 0, 10, {
+              reverse: true
+            })
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm blur3">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('blur3', 'color', 0, 10, {
+              max: 16
+            })</pre>
+        </div>
+    </section>
+    <section>
+        <h3>
+            Swing
+        </h3>
+
+        <div class="demo">
+            <div class="rythm swing1">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('swing1', 'swing', 0, 10)
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm swing2">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('swing2', 'swing', 0, 10, {
+              curve: 'up',
+            })
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm swing3">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('swing3', 'swing', 0, 10, {
+              direction: 'left',
+            })
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm swing4">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('swing4', 'swing', 0, 10, {
+              radius: 10,
+            })
+          </pre>
+        </div>
+    </section>
+    <h1>
+        Added in v2.2.0
+    </h1>
+    <section>
+        <h3>Border-Radius</h3>
+
+        <div class="demo">
+            <div class="rythm radius1"></div>
+          <pre class="prettyprint">
+            rythm.addRythm('radius1', 'radius', 0, 10, {
+              min: 0,
+              max: 30
+            })
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm radius2"></div>
+          <pre class="prettyprint">
+            rythm.addRythm('radius1', 'radius', 0, 10, {
+              reverse: true,
+              min: 0,
+              max: 30
+            })
+          </pre>
+        </div>
+    </section>
+    <h1>
+        Added in v2.0.0
+    </h1>
+    <section>
+        <h3>
+            Pulse
+        </h3>
+
+        <div class="demo">
+            <div class="rythm pulse1">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('pulse1', 'pulse', 0, 10)
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm pulse2">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('pulse2', 'pulse', 0, 10, {
+              min: 0.1,
+              max: 1
+            })
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm pulse3">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('pulse3', 'pulse', 0, 10, {
+              min: 1,
+              max: 1.75
+            })
+          </pre>
+        </div>
+    </section>
+    <section>
+        <h3>
+            Jump
+        </h3>
+
+        <div class="demo">
+            <div class="rythm jump1">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('jump1', 'jump', 0, 10)
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm jump2">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('jump2', 'jump', 150, 40, {
+              min: -20,
+              max: 20
+            })
+          </pre>
+        </div>
+    </section>
+    <section>
+        <h3>
+            Shake
+        </h3>
+
+        <div class="demo">
+            <div class="rythm shake1">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('shake1', 'shake', 0, 10)
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm shake2">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('shake2', 'shake', 150, 40, {
+              min: 0,
+              max: 20
+            })
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm shake3">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('shake3', 'shake', 0, 10, {
+              direction: 'left'
+            })
+          </pre>
+        </div>
+    </section>
+    <section>
+        <h3>
+            Twist
+        </h3>
+
+        <div class="demo">
+            <div class="rythm twist1">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('twist1', 'twist', 0, 10)
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm twist2">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('twist2', 'twist', 0, 10, {
+              min: 20,
+              max: 180
+            })
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm twist3">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('twist3', 'twist', 0, 10, {
+              direction: 'left'
+            })
+          </pre>
+        </div>
+    </section>
+    <section>
+        <h3>
+            Vanish
+        </h3>
+
+        <div class="demo">
+            <div class="rythm vanish vanish1">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('vanish1', 'vanish', 0, 10)
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm vanish vanish2">♫</div>
+          <pre class="prettyprint">
+            rythm.addRythm('vanish2', 'vanish', 0, 10, {
+              reverse: true
+            })
+          </pre>
+        </div>
+    </section>
+    <section>
+        <h3>
+            Background-Color
+        </h3>
+
+        <div class="demo">
+            <div class="rythm color1"></div>
+          <pre class="prettyprint">
+            rythm.addRythm('color1', 'color', 0, 10)
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm color2"></div>
+          <pre class="prettyprint">
+            rythm.addRythm('color2', 'color', 0, 10, {
+              from: [0,0,255],
+              to:[255,0,255]
+            })
+          </pre>
+        </div>
+        <div class="demo">
+            <div class="rythm color3"></div>
+          <pre class="prettyprint">
+            rythm.addRythm('color3', 'color', 0, 10, {
+              from: [255,255,0],
+              to:[255,0,0]
+            })</pre>
+        </div>
+    </section>
+
+    <div id='playerBottom'>
+        <button id='startBottom'>Start Demo</button>
+        <button id='stopBottom'>Stop Demo</button>
+        <button id='micBottom'>Use Microphone</button>
+    </div>
+
+    <div>
+        <div id="shout" class="shout">
+            <div class="thanks">Thanks for your contribution !</div>
+            <img class="contributor-avatar" src="https://avatars1.githubusercontent.com/u/29417216?s=460&v=4" />
+            <div class="contributor-login"><a class="contributor-login-link" href="https://github.com/indyfw">Follow Me !</a>
+            </div>
+        </div>
+    </div>
+
+    <script type="text/javascript" src="rythm/demo/scrollingelement.min.js"></script>
+    <!--<script src="https://cdn.rawgit.com/google/code-prettify/master/loader/run_prettify.js"></script>-->
+    <script type="text/javascript" src="rythm/rythm.js"></script>
+    <script type="text/javascript" src="rythm/demo/example.js"></script>
+</div>
 </body>
 </html>
+
