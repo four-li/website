@@ -27,4 +27,10 @@ class Ajax extends BaseController
 
         return json(['code'=>0,'msg'=>'success']);
     }
+
+    // 删除
+    public function del($table,$id){
+        $res = db($table)->delete($id);
+        return json(['code'=>0,'msg'=>'success']);
+    }
 }

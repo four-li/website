@@ -24,7 +24,6 @@
     </style>
 </head>
 
-
 <body class="gray-bg">
 <div class="wrapper wrapper-content animated fadeInRight">
 
@@ -107,17 +106,41 @@
                 <div class="modal-header">
                     <button type="button" class="close" data-dismiss="modal"><span aria-hidden="true">&times;</span><span class="sr-only">Close</span></button>
                     <h4 class="modal-title">添加音乐</h4>
-
-                    
-
                 </div>
+
+                <form action="{:url('add')}" id="add_music_from">
                 <div class="modal-body">
-                    <input type="text">
+                    <div class="row">
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">搜</label>
+                            <div class="col-sm-3">
+                                <input type="text" name="keyword" placeholder="歌名或歌手" class="form-control m-b">
+                            </div>
+                        </div>
+
+                        <div class="form-group">
+                            <label class="col-sm-2 control-label">排行</label>
+                            <div class="col-sm-3">
+                                <select class="form-control m-b" name="id">
+                                    <option value="3"> 欧美</option>
+                                    <option value="5"> 内地</option>
+                                    <option value="6"> 港台</option>
+                                    <option value="16">韩国</option>
+                                    <option value="17">日本</option>
+                                    <option value="18">民谣</option>
+                                    <option value="19">摇滚</option>
+                                    <option value="23">销量</option>
+                                    <option value="26">热歌</option>
+                                </select>
+                            </div>
+                        </div>
+                    </div>
                 </div>
                 <div class="modal-footer">
                     <button type="button" class="btn btn-white" data-dismiss="modal">关闭</button>
-                    <button type="button" class="btn btn-primary">保存</button>
+                    <input type="submit" class="btn btn-primary" value="获取">
                 </div>
+                </form>
             </div>
         </div>
     </div>
@@ -162,43 +185,42 @@
         })
 
         $(document).ready(function() {
-//
             $('.footable').footable();
             $('.footable2').footable();
 
             $('.demo4').click(function () {
                 var id = $(this).attr('serial');
                 swal({
-                            title: "您确定要删除这条信息吗",
-                            text: "删除后将无法恢复，请谨慎操作！",
-                            type: "warning",
-                            showCancelButton: true,
-                            confirmButtonColor: "#DD6B55",
-                            confirmButtonText: "是的，我要删除！",
-                            cancelButtonText: "让我再考虑一下…",
-                            closeOnConfirm: false,
-                            closeOnCancel: false
-                        },
+                    title: "您确定要删除这条信息吗",
+                    text: "删除后将无法恢复，请谨慎操作！",
+                    type: "warning",
+                    showCancelButton: true,
+                    confirmButtonColor: "#DD6B55",
+                    confirmButtonText: "是的，我要删除！",
+                    cancelButtonText: "让我再考虑一下…",
+                    closeOnConfirm: false,
+                    closeOnCancel: false
+                },
 
-                        function (isConfirm) {
-                            // 返回结果
-                            if (isConfirm) {
-                                $.get("{:url('Ajax/del_user')}", {
-                                    id: id
-                                }, function (e) {
-                                    if (e) {
-                                        swal("删除成功！", "您已经删除了这条信息。", "success");
-                                        $('.del_' + id).remove();
-                                    } else {
-                                        swal("删除失败", "删除出错", "error");
-                                    }
-                                })
+                function (isConfirm) {
+                    // 返回结果
+                    if (isConfirm) {
+                        $.get("{:url('Ajax/del')}", {
+                            id: id,
+                            table: 'qq_music',
+                        }, function (e) {
+                            if (e) {
+                                swal("删除成功！", "您已经删除了这条信息。", "success");
+                                $('.del_' + id).remove();
                             } else {
-                                swal("已取消", "您取消了删除操作！", "error");
+                                swal("删除失败", "删除出错", "error");
                             }
-                        });
+                        })
+                    } else {
+                        swal("已取消", "您取消了删除操作！", "error");
+                    }
+                });
             });
-
         });
 
         $('#submit_add').click(function(){
