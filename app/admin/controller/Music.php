@@ -41,4 +41,5 @@ class Music extends BaseController
         }
         return $this->redirect('index');
     }
+
 }

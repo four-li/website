@@ -1,8 +1,8 @@
 <?php
 namespace app\admin\model;
 
-use think\Request;
 use traits\model\SoftDelete;
+
 class Admin extends \think\Model{
 
     protected $autoWriteTimestamp = 'datetime';
