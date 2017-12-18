@@ -33,4 +33,5 @@ class Ajax extends BaseController
         $res = db($table)->delete($id);
         return json(['code'=>0,'msg'=>'success']);
     }
+
 }
