@@ -117,5 +117,9 @@ class Geek extends BaseController
     public function geek_z22(){
         return $this->fetch();
     }
+    // 粒子文字
+    public function geek_z23(){
+        return $this->fetch();
+    }
 }
 
