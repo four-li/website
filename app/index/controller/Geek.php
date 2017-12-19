@@ -109,10 +109,13 @@ class Geek extends BaseController
     public function geek_z20(){
         return $this->fetch();
     }
-    // 粒子动画
+    // 圣诞快乐女儿
     public function geek_z21(){
         return $this->fetch();
     }
-
+    // 抽奖
+    public function geek_z22(){
+        return $this->fetch();
+    }
 }
 

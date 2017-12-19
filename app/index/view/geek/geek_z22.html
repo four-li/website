@@ -1,0 +1,42 @@
+<html>
+<head>
+    <title>年终奖抽奖活动</title>
+    <meta charset="UTF-8" />
+    <meta name="viewport" content="width=device-width,initial-scale=1,user-scalable=0" />
+    <meta name="format-detection" content="telephone=no" />
+    <style>
+        body {
+            padding: 0;
+            margin: 0;
+        }
+        .lotterybox{
+            height: 100%;
+        }
+    </style>
+</head>
+
+<body>
+<div class="lotterybox"></div>
+
+<!-- Zepto or jQuery -->
+<script src="lottery/dist/zepto.min.js"></script>
+
+<link rel="stylesheet" href="lottery/dist/lottery.min.css" />
+<script src="lottery/dist/lottery.compact.min.js"></script>
+
+<!-- ROCK ON -->
+<script>
+    $.lottery({
+        el: '.lotterybox',
+        api: 'lottery/sample-data.json',
+        once: false,
+        subtitle: "company",
+        // desc: "title",
+        timeout: 8,
+        number: 3
+    });
+</script>
+
+</body>
+
+</html>
