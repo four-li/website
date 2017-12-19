@@ -11,10 +11,10 @@ class Panel extends BaseController
     public function _initialize(){
         parent::_initialize();
         if(Session::get('user_info')['id'] != 100001){
-            return $this->error('warning! denied access!!!');
+            return $this->error('warning! denied access!!!','login/login');
         }
     }
-
+    
     // 密码管理
     public function password_index(Request $request){
 
