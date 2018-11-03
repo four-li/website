@@ -1,6 +1,7 @@
-# website
--------
-my website ..
+=== 老早之前的BT3写了点前端
 
 
+> 没啥东西
 
+__看这里吧：__
+[新的](https://doc.c-cf.cn)
